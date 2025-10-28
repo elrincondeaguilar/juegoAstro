@@ -1,0 +1,112 @@
+[
+    {
+        "id": "1",
+        "category": "Sonido",
+        "question": "MAR",
+        "options": [
+            "La frecuencia de la onda sonora",
+            "La temperatura del aire",
+            "El tipo de material del tubo"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": "2",
+        "category": "Sonido",
+        "question": "En el experimento de la resonancia de un tubo de órgano, ¿qué ocurre cuando la frecuencia de la fuente coincide con la frecuencia natural del tubo?",
+        "options": [
+            "Se produce una interferencia destructiva",
+            "La intensidad sonora disminuye",
+            "Se produce una amplificación del sonido"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": "3",
+        "category": "Sonido",
+        "question": "En un experimento con diferentes medios (aire, agua, metal), ¿cómo varía la velocidad del sonido en cada uno de ellos?",
+        "options": [
+            "Es más rápida en el aire que en el agua",
+            "Es más rápida en el agua que en el metal",
+            "Es más rápida en el metal que en el agua"
+        ],
+        "correctAnswer": 2
+    },
+    {
+        "id": "4",
+        "category": "Luz",
+        "question": "En el experimento de la descomposición de la luz blanca, ¿qué ocurre cuando la luz pasa a través de un prisma?",
+        "options": [
+            "Se dispersa en varios colores",
+            "Se refleja en un solo color",
+            "Se refracta sin cambiar su color"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "id": "5",
+        "category": "Luz",
+        "question": "En un experimento de interferencia de luz con dos rendijas, ¿qué se observa en la pantalla?",
+        "options": [
+            "Un patrón de luz uniforme",
+            "Un patrón de bandas brillantes y oscuras",
+            "Una imagen borrosa de la fuente"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": "6",
+        "category": "Luz",
+        "question": "En un experimento para medir el índice de refracción de un material, ¿qué factor principal se debe medir?",
+        "options": [
+            "El ángulo de incidencia y el ángulo de refracción",
+            "La intensidad de la luz reflejada",
+            "El color de la luz utilizada"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "id": "7",
+        "category": "Electromagnetismo",
+        "question": "En un experimento con un solenoide y una corriente eléctrica, ¿qué se observa al aumentar la corriente?",
+        "options": [
+            "Aumenta la fuerza del campo magnético",
+            "Disminuye la fuerza del campo magnético",
+            "El campo magnético se hace irregular"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "id": "8",
+        "category": "Electromagnetismo",
+        "question": "En un experimento de inducción electromagnética con un imán y una bobina, ¿qué sucede cuando el imán se mueve rápidamente a través de la bobina?",
+        "options": [
+            "Se induce una corriente en la bobina",
+            "No ocurre ninguna inducción",
+            "El imán pierde su magnetismo"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "id": "9",
+        "category": "Electromagnetismo",
+        "question": "En un experimento de ley de Faraday, ¿cómo varía la corriente inducida cuando se aumenta la velocidad de cambio del campo magnético?",
+        "options": [
+            "La corriente inducida aumenta",
+            "La corriente inducida disminuye",
+            "La corriente permanece constante"
+        ],
+        "correctAnswer": 0
+    },
+    {
+        "id": "10",
+        "category": "Electromagnetismo",
+        "question": "En un experimento sobre el efecto Hall, ¿qué se mide para determinar la densidad de corriente en un material?",
+        "options": [
+            "El voltaje transversal al flujo de corriente",
+            "La temperatura del material",
+            "La longitud del conductor"
+        ],
+        "correctAnswer": 0
+    }
+]

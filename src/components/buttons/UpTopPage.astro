@@ -1,0 +1,77 @@
+---
+import ArroUp from '@assets/icons/arrow-up.svg';
+import 'animate.css';
+---
+
+<div class="contenedor-flecha" id="contenedor-flecha">
+  <img src={ArroUp.src} alt="Arrow Up" height="30" id="image_arrow" />
+</div>
+
+<style>
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideDown {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+  }
+
+  .contenedor-flecha {
+    background-color: #011140;
+    display: none;
+    position: fixed;
+    z-index: 10;
+    bottom: 10px;
+    right: 40px;
+    cursor: pointer;
+    border-radius: 100%;
+    padding: 10px;
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .contenedor-flecha.hidden {
+    animation: slideDown 0.3s ease-out;
+  }
+</style>
+
+<script>
+  let contenedorFlechaArriba = document.getElementById('contenedor-flecha');
+
+  window.onscroll = () => {
+    if (document.documentElement.scrollTop > 30) {
+      contenedorFlechaArriba!.style.display = 'block';
+      contenedorFlechaArriba!.classList.remove('hidden');
+    } else {
+      contenedorFlechaArriba!.classList.add('hidden');
+      setTimeout(() => {
+        contenedorFlechaArriba!.style.display = 'none';
+      }, 300);
+    }
+  };
+
+  contenedorFlechaArriba?.addEventListener('click', () => {
+    contenedorFlechaArriba!.classList.add('hidden');
+
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      setTimeout(() => {
+        contenedorFlechaArriba!.classList.remove('hidden');
+      }, 300);
+    }, 300);
+  });
+</script>
