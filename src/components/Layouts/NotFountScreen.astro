@@ -1,0 +1,134 @@
+---
+// Componente 404 - Página no encontrada
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Página no encontrada</title>
+    <link rel="shortcut icon" href="/images/favicon-32x32.png" type="image/x-icon" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        overflow: hidden;
+      }
+
+      .container-404 {
+        text-align: center;
+        padding: 2rem;
+        animation: fadeIn 0.6s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .error-code {
+        font-size: clamp(6rem, 20vw, 12rem);
+        font-weight: 900;
+        line-height: 1;
+        margin-bottom: 1rem;
+        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+        animation: bounce 2s ease-in-out infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .error-message {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .error-description {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+        margin-bottom: 2.5rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .btn-home {
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        background: white;
+        color: #667eea;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-home:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        background: #f0f0f0;
+      }
+
+      .icon-404 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: rotate 4s linear infinite;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container-404 {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-404">
+      <div class="icon-404">🔍</div>
+      <h1 class="error-code">404</h1>
+      <h2 class="error-message">¡Oops! Página no encontrada</h2>
+      <p class="error-description">
+        La página que buscas no existe o ha sido movida. No te preocupes, puedes volver al
+        inicio.
+      </p>
+      <a href="/" class="btn-home">🏠 Volver al Inicio</a>
+    </div>
+  </body>
+</html>

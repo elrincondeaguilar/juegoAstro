@@ -6,6 +6,17 @@ let answers = [];
 let currentQuestionIndex = 0;
 let gameCallback = null; // Callback del juego para cuando terminen todas las preguntas
 
+// Importar función para guardar en Google Sheets
+async function saveResultsToSheets(data) {
+  try {
+    // Usar ruta absoluta para asegurar la carga correcta desde cualquier script
+    const module = await import('/js/sheets.js');
+    await module.saveToGoogleSheets(data);
+  } catch (error) {
+    console.error('Error al cargar módulo de Google Sheets:', error);
+  }
+}
+
 function resetAnswers() {
   currentQuestionIndex = 0;
   answers = [];
@@ -121,13 +132,13 @@ function saveAnswer(selectedIndex, questionObj) {
 function showRecommendationsModal(gameCallback) {
   const modal = document.getElementById('recommendationsModal');
   modal.style.display = 'flex';
-  
+
   // Cambiar el título si es nota perfecta
   const correctAnswersCount = answers.filter((answer) => answer.isCorrect).length;
   const totalQuestions = answers.length;
   const scorePercentage = (correctAnswersCount / totalQuestions) * 100;
   const isPerfectScore = scorePercentage >= 90;
-  
+
   const modalTitle = modal.querySelector('h2');
   if (isPerfectScore) {
     modalTitle.innerHTML = '🏆 ¡PUNTUACIÓN PERFECTA! 🏆';
@@ -145,7 +156,7 @@ function showRecommendationsModal(gameCallback) {
     // Agregar clases base para el hover
     closeButton.classList.add('modal-button');
     closeButton.classList.remove('perfect-button', 'normal-button');
-    
+
     if (isPerfectScore) {
       closeButton.innerHTML = '🌟 ¡Soy un Genio de la Física! 🌟';
       closeButton.style.background = 'linear-gradient(45deg, #FFD700, #FFA500)';
@@ -159,7 +170,7 @@ function showRecommendationsModal(gameCallback) {
       closeButton.style.fontWeight = '';
       closeButton.classList.add('normal-button');
     }
-    
+
     closeButton.addEventListener(
       'click',
       () => {
@@ -192,6 +203,17 @@ function getRecommendations() {
   else if (scorePercentage >= 30) grade = 2;
   else grade = 1;
 
+  // Guardar resultados en Google Sheets
+  saveResultsToSheets({
+    nombre: window.playerName,
+    grado: window.playerGrade,
+    correctas: correctAnswersCount,
+    total: totalQuestions,
+    porcentaje: scorePercentage,
+    nota: grade,
+    respuestas: answers,
+  });
+
   // Generar mensaje de felicitación según la nota
   let congratulationsMessage = '';
   let isMaxScore = grade === 5;
@@ -211,17 +233,22 @@ function getRecommendations() {
 
   // Aplicar animaciones y estilos según la nota
   const modalContent = document.querySelector('#recommendationsModal .modal-content');
-  
+
   // Limpiar clases anteriores
-  modalContent.classList.remove('perfect-score', 'good-score', 'average-score', 'low-score');
-  
+  modalContent.classList.remove(
+    'perfect-score',
+    'good-score',
+    'average-score',
+    'low-score',
+  );
+
   if (grade === 5) {
     // Nota perfecta - Dorado brillante
     modalContent.classList.add('perfect-score');
     modalContent.classList.add('animate__animated', 'animate__tada');
     modalContent.style.background = 'linear-gradient(135deg, #FFD700, #FFA500, #FF6B6B)';
     modalContent.style.border = '3px solid #FFD700';
-    
+
     // Restaurar después de la animación
     setTimeout(() => {
       modalContent.style.background = '';
@@ -234,7 +261,7 @@ function getRecommendations() {
     modalContent.classList.add('animate__animated', 'animate__bounceIn');
     modalContent.style.background = 'linear-gradient(135deg, #44C7F4, #6BB6FF)';
     modalContent.style.border = '2px solid #44C7F4';
-    
+
     setTimeout(() => {
       modalContent.style.background = '';
       modalContent.style.border = '';
@@ -246,7 +273,7 @@ function getRecommendations() {
     modalContent.classList.add('animate__animated', 'animate__fadeInUp');
     modalContent.style.background = 'linear-gradient(135deg, #FFA500, #FFB84D)';
     modalContent.style.border = '2px solid #FFA500';
-    
+
     setTimeout(() => {
       modalContent.style.background = '';
       modalContent.style.border = '';
@@ -258,7 +285,7 @@ function getRecommendations() {
     modalContent.classList.add('animate__animated', 'animate__fadeIn');
     modalContent.style.background = 'linear-gradient(135deg, #FF6B6B, #FF8E8E)';
     modalContent.style.border = '2px solid #FF6B6B';
-    
+
     setTimeout(() => {
       modalContent.style.background = '';
       modalContent.style.border = '';
@@ -267,8 +294,15 @@ function getRecommendations() {
   }
 
   // Mostrar resultado con estilo especial para nota máxima
-  const resultHTML = isMaxScore 
-    ? `<div style="text-align: center; animation: pulse 2s infinite;">
+  const studentLine =
+    window.playerName && window.playerGrade
+      ? `<div style="margin-bottom:8px; padding:6px 10px; background:#f7f7f7; border-radius:6px;">
+         👤 Estudiante: <strong>${window.playerName}</strong> — <em>${window.playerGrade}</em>
+       </div>`
+      : '';
+
+  const resultHTML = isMaxScore
+    ? `${studentLine}<div style="text-align: center; animation: pulse 2s infinite;">
         <strong style="font-size: 1.2em; color: #FFD700;">🌟 RESULTADO EXTRAORDINARIO 🌟</strong><br>
         <div style="font-size: 1.1em; margin: 10px 0; color: #FF6B6B;">
           ${congratulationsMessage}
@@ -279,7 +313,7 @@ function getRecommendations() {
           <span style="font-size: 1.5em; color: #FFD700;">⭐ NOTA: ${grade}/5 ⭐</span>
         </div>
       </div>`
-    : `<strong>📊 Tu Resultado:</strong><br>
+    : `${studentLine}<strong>📊 Tu Resultado:</strong><br>
         ${congratulationsMessage}<br>
         Respuestas correctas: ${correctAnswersCount} de ${totalQuestions}<br>
         Puntuación: ${scorePercentage.toFixed(1)}% - <strong>Nota: ${grade}/5</strong>`;

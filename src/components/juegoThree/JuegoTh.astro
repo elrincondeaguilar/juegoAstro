@@ -23,72 +23,110 @@ import './juegoTh.scss';
     <style>
       /* Animaciones especiales para nota perfecta */
       @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
-      
+
       @keyframes goldShine {
-        0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
-        50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.4); }
-        100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+        0% {
+          box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        50% {
+          box-shadow:
+            0 0 40px rgba(255, 215, 0, 0.8),
+            0 0 60px rgba(255, 215, 0, 0.4);
+        }
+        100% {
+          box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
       }
-      
+
       @keyframes blueShine {
-        0% { box-shadow: 0 0 15px rgba(68, 199, 244, 0.4); }
-        50% { box-shadow: 0 0 25px rgba(68, 199, 244, 0.6), 0 0 35px rgba(68, 199, 244, 0.3); }
-        100% { box-shadow: 0 0 15px rgba(68, 199, 244, 0.4); }
+        0% {
+          box-shadow: 0 0 15px rgba(68, 199, 244, 0.4);
+        }
+        50% {
+          box-shadow:
+            0 0 25px rgba(68, 199, 244, 0.6),
+            0 0 35px rgba(68, 199, 244, 0.3);
+        }
+        100% {
+          box-shadow: 0 0 15px rgba(68, 199, 244, 0.4);
+        }
       }
-      
+
       @keyframes orangeShine {
-        0% { box-shadow: 0 0 15px rgba(255, 165, 0, 0.4); }
-        50% { box-shadow: 0 0 25px rgba(255, 165, 0, 0.6), 0 0 35px rgba(255, 165, 0, 0.3); }
-        100% { box-shadow: 0 0 15px rgba(255, 165, 0, 0.4); }
+        0% {
+          box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+        }
+        50% {
+          box-shadow:
+            0 0 25px rgba(255, 165, 0, 0.6),
+            0 0 35px rgba(255, 165, 0, 0.3);
+        }
+        100% {
+          box-shadow: 0 0 15px rgba(255, 165, 0, 0.4);
+        }
       }
-      
+
       @keyframes redShine {
-        0% { box-shadow: 0 0 15px rgba(255, 99, 99, 0.4); }
-        50% { box-shadow: 0 0 25px rgba(255, 99, 99, 0.6), 0 0 35px rgba(255, 99, 99, 0.3); }
-        100% { box-shadow: 0 0 15px rgba(255, 99, 99, 0.4); }
+        0% {
+          box-shadow: 0 0 15px rgba(255, 99, 99, 0.4);
+        }
+        50% {
+          box-shadow:
+            0 0 25px rgba(255, 99, 99, 0.6),
+            0 0 35px rgba(255, 99, 99, 0.3);
+        }
+        100% {
+          box-shadow: 0 0 15px rgba(255, 99, 99, 0.4);
+        }
       }
-      
+
       .perfect-score {
         animation: goldShine 2s ease-in-out infinite !important;
       }
-      
+
       .good-score {
         animation: blueShine 2s ease-in-out infinite !important;
       }
-      
+
       .average-score {
         animation: orangeShine 2s ease-in-out infinite !important;
       }
-      
+
       .low-score {
         animation: redShine 2s ease-in-out infinite !important;
       }
-      
+
       .perfect-score h2 {
         animation: pulse 1.5s ease-in-out infinite;
-        color: #FFD700 !important;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        color: #ffd700 !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
       }
-      
+
       /* Estilos para botones con hover */
       .modal-button {
         transition: all 0.3s ease !important;
       }
-      
+
       .modal-button:hover {
         transform: scale(1.05) !important;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
       }
-      
+
       .perfect-button:hover {
-        background: linear-gradient(45deg, #FFD700, #FFA500, #FF6B6B) !important;
+        background: linear-gradient(45deg, #ffd700, #ffa500, #ff6b6b) !important;
         box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5) !important;
       }
-      
+
       .normal-button:hover {
         background-color: #56a3a0 !important;
         box-shadow: 0 5px 15px rgba(104, 195, 192, 0.4) !important;
@@ -154,6 +192,46 @@ import './juegoTh.scss';
   <div class="message message--replay animate__animated" id="replayMessage">
     <span id="replayTextMessage" class="animate__animated"> Haz finalizado tu quiz </span>
     <button class="replay-button animate__animated" id="replayButton">Reiniciar</button>
+  </div>
+
+  <!-- Modal de Registro de Estudiante (se muestra al inicio) -->
+  <div id="playerModal" class="modal" style="display: flex;">
+    <div class="modal-content">
+      <h2>👋 Antes de empezar</h2>
+      <p>Por favor ingresa tu nombre y el grado al que perteneces.</p>
+      <form id="playerForm" style="display: grid; gap: 12px; text-align: left;">
+        <label for="playerName" style="font-weight: 600;">Nombre del estudiante</label>
+        <input
+          id="playerName"
+          name="playerName"
+          type="text"
+          required
+          maxlength="40"
+          placeholder="Ej: Juan Pérez"
+          style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;"
+        />
+
+        <label for="playerGrade" style="font-weight: 600;">Grado</label>
+        <select
+          id="playerGrade"
+          name="playerGrade"
+          required
+          style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;"
+        >
+          <option value="">Selecciona tu grupo</option>
+          <option value="11-1">11-1</option>
+          <option value="11-2">11-2</option>
+          <option value="11-3">11-3</option>
+        </select>
+
+        <button
+          type="submit"
+          class="modal-button normal-button"
+          style="margin-top: 8px; background-color: #68c3c0; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-size: 16px;"
+          >🎮 Comenzar</button
+        >
+      </form>
+    </div>
   </div>
 
   <!-- modal -->

@@ -22,6 +22,7 @@ var particlesInUse = [];
 var isGamePaused = false; // Variable para pausar completamente el juego
 var isShowingQuestion = false; // Variable para evitar múltiples preguntas simultáneas
 var questionsCompleted = false; // Variable para indicar si ya se completaron todas las preguntas
+var isGameRunning = false; // Variable para controlar si el loop debe ejecutarse
 
 function resetGame() {
   game = {
@@ -85,10 +86,12 @@ function resetGame() {
 
     status: 'playing',
   };
-  
+
   // Resetear variables de estado del juego
+  isGamePaused = false;
+  isShowingQuestion = false;
   questionsCompleted = false;
-  
+
   fieldLevel.innerHTML = Math.floor(game.level);
   hideReplay();
 }
@@ -135,7 +138,13 @@ function createScene() {
   renderer.shadowMap.enabled = true;
 
   container = document.getElementById('world');
-  container.appendChild(renderer.domElement);
+  // Limpiar cualquier canvas previo para evitar superposiciones
+  if (container) {
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+    container.appendChild(renderer.domElement);
+  }
 
   window.addEventListener('resize', handleWindowResize, false);
 
@@ -157,12 +166,12 @@ function showQuestion() {
   if (questionsCompleted) {
     return;
   }
-  
+
   // Evitar múltiples preguntas simultáneas
   if (isShowingQuestion || isGamePaused) {
     return;
   }
-  
+
   // Pausar completamente el juego
   isGamePaused = true;
   isShowingQuestion = true;
@@ -880,6 +889,8 @@ function createEnnemies() {
   //ennemiesHolder.mesh.position.y = -game.seaRadius;
   scene.add(ennemiesHolder.mesh);
 }
+// Marcar como inicializado
+isGameInitialized = true;
 
 function createParticles() {
   for (var i = 0; i < 10; i++) {
@@ -892,6 +903,11 @@ function createParticles() {
 }
 
 function loop() {
+  // Si el juego no está corriendo, detener el loop completamente
+  if (!isGameRunning) {
+    return;
+  }
+
   newTime = new Date().getTime();
   deltaTime = newTime - oldTime;
   oldTime = newTime;
@@ -1020,6 +1036,8 @@ function removeEnergy() {
 }
 
 function updatePlane() {
+  // Si el avión aún no está disponible, evitar errores y salir
+  if (!airplane || !airplane.mesh) return;
   game.planeSpeed = normalize(
     mousePos.x,
     -0.5,
@@ -1117,10 +1135,13 @@ function init(event) {
   // Boton que se muestra al finalizaar las preguntas
   replayButton = document.getElementById('replayButton');
 
+  // Reset estado y escena completamente
   resetGame();
   createScene();
 
   createLights();
+  // Asegurar referencia limpia del avión y crearlo
+  airplane = null;
   createPlane();
   createSea();
   createSky();
@@ -1133,5 +1154,7 @@ function init(event) {
   //document.addEventListener('mouseup', handleMouseUp, false); <--- Encargado de hacer el handle click para reiniciar el juego
   document.addEventListener('touchend', handleTouchEnd, false);
 
+  // Activar el flag para que el loop se ejecute
+  isGameRunning = true;
   loop();
 }
