@@ -230,6 +230,7 @@
               <th>Fecha</th>
               <th>Nombre</th>
               <th>Grado</th>
+              <th>Cuenta</th>
               <th>Correctas</th>
               <th>Porcentaje</th>
               <th>Nota</th>
@@ -241,6 +242,7 @@
                 <td>${new Date(r.timestamp).toLocaleString('es-CO')}</td>
                 <td>${r.nombre || 'Anónimo'}</td>
                 <td>${r.grado || 'N/A'}</td>
+                <td>${r.email || '—'}</td>
                 <td>${r.correctas || 0}/${r.total || 0}</td>
                 <td>${(r.porcentaje || 0).toFixed(1)}%</td>
                 <td><span class="nota nota-${r.nota || 0}">${r.nota || 0}/5</span></td>

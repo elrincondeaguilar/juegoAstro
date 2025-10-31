@@ -206,6 +206,7 @@ function getRecommendations() {
   // Guardar resultados en Google Sheets
   saveResultsToSheets({
     nombre: window.playerName,
+    email: window.playerEmail,
     grado: window.playerGrade,
     correctas: correctAnswersCount,
     total: totalQuestions,
@@ -294,10 +295,14 @@ function getRecommendations() {
   }
 
   // Mostrar resultado con estilo especial para nota máxima
+  const studentIdentityParts = [];
+  if (window.playerName) studentIdentityParts.push(`<strong>${window.playerName}</strong>`);
+  if (window.playerGrade) studentIdentityParts.push(`<em>${window.playerGrade}</em>`);
+  if (window.playerEmail) studentIdentityParts.push(`<code>${window.playerEmail}</code>`);
   const studentLine =
-    window.playerName && window.playerGrade
+    studentIdentityParts.length > 0
       ? `<div style="margin-bottom:8px; padding:6px 10px; background:#f7f7f7; border-radius:6px;">
-         👤 Estudiante: <strong>${window.playerName}</strong> — <em>${window.playerGrade}</em>
+         👤 Estudiante: ${studentIdentityParts.join(' — ')}
        </div>`
       : '';
 

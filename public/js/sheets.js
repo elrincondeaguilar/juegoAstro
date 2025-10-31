@@ -14,6 +14,7 @@ const SHEET_WEB_APP_URL =
  * Guarda los resultados del estudiante en Google Sheets
  * @param {Object} data - Datos del estudiante y resultados
  * @param {string} data.nombre - Nombre del estudiante
+ * @param {string} data.email - Correo del estudiante (opcional)
  * @param {string} data.grado - Grado del estudiante (11-1, 11-2, 11-3)
  * @param {number} data.correctas - Número de respuestas correctas
  * @param {number} data.total - Total de preguntas
@@ -41,6 +42,7 @@ export async function saveToGoogleSheets(data) {
     const payload = {
       timestamp: new Date().toISOString(),
       nombre: data.nombre || 'Anónimo',
+      email: data.email || '',
       grado: data.grado || 'N/A',
       correctas: data.correctas || 0,
       total: data.total || 0,
@@ -126,6 +128,7 @@ export function exportLocalResultsToCSV() {
   const headers = [
     'Fecha',
     'Nombre',
+    'Email',
     'Grado',
     'Correctas',
     'Total',
@@ -135,6 +138,7 @@ export function exportLocalResultsToCSV() {
   const rows = results.map((r) => [
     new Date(r.timestamp).toLocaleString('es-CO'),
     r.nombre || 'N/A',
+    r.email || '',
     r.grado || 'N/A',
     r.correctas || 0,
     r.total || 0,

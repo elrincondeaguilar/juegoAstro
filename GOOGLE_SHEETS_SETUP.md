@@ -9,9 +9,9 @@ Esta guía te ayudará a configurar Google Sheets para guardar automáticamente 
 3. Nómbrala: **"Resultados Quiz Física - EFE Gómez"**
 4. En la primera fila, agrega estos encabezados:
 
-| A     | B      | C     | D         | E     | F          | G    | H          |
-| ----- | ------ | ----- | --------- | ----- | ---------- | ---- | ---------- |
-| Fecha | Nombre | Grado | Correctas | Total | Porcentaje | Nota | Respuestas |
+| A     | B      | C     | D     | E         | F     | G          | H    | I          |
+| ----- | ------ | ----- | ----- | --------- | ----- | ---------- | ---- | ---------- |
+| Fecha | Nombre | Email | Grado | Correctas | Total | Porcentaje | Nota | Respuestas |
 
 ## 🔧 Paso 2: Crear el Google Apps Script
 
@@ -48,6 +48,7 @@ function doPost(e) {
     const row = [
       new Date(data.timestamp),
       data.nombre,
+      data.email || '',
       data.grado,
       data.correctas,
       data.total,
@@ -83,6 +84,7 @@ function testDoPost() {
       contents: JSON.stringify({
         timestamp: new Date().toISOString(),
         nombre: 'Juan Pérez',
+        email: 'juan@colegio.edu.co',
         grado: '11-1',
         correctas: 4,
         total: 5,
@@ -200,6 +202,26 @@ import('./js/sheets.js').then((m) => m.downloadLocalResults());
 ---
 
 ## 🎓 Uso Educativo
+---
+
+## 📧 (Opcional) Capturar el correo automáticamente
+
+Tienes dos alternativas para llenar la columna Email:
+
+1) Solicitarlo en el juego (ya viene implementado como campo opcional en el formulario de inicio). Más simple, no requiere autenticación.
+
+2) Automático con Google Workspace (requiere dominio escolar):
+   - Despliega el Web App como:
+     - Ejecutar como: Usuario que accede a la aplicación
+     - Quién tiene acceso: Cualquiera en tu organización
+   - En `doPost`, reemplaza `data.email || ''` por:
+
+```javascript
+const email = Session.getActiveUser().getEmail();
+// ... y en la fila usa `email`
+```
+
+Nota: Esto solo funciona si todos los estudiantes pertenecen a tu dominio de Google Workspace y acceden autenticados. Para sitios públicos, usa el campo opcional del juego o integra Google Identity Services para iniciar sesión y enviar el email en el payload.
 
 Esta configuración es ideal para:
 

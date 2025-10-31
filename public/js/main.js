@@ -38,9 +38,11 @@ if (replayBtn) {
 
       // Limpiar los campos del formulario
       const nameInput = document.getElementById('playerName');
-      const gradeSelect = document.getElementById('playerGrade');
+  const gradeSelect = document.getElementById('playerGrade');
+  const emailInput = document.getElementById('playerEmail');
       if (nameInput) nameInput.value = '';
       if (gradeSelect) gradeSelect.value = '';
+  if (emailInput) emailInput.value = '';
 
       // Enfocar en el campo de nombre
       setTimeout(() => {
@@ -60,8 +62,10 @@ if (playerForm && playerModal) {
   playerForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const nameInput = document.getElementById('playerName');
+    const emailInput = document.getElementById('playerEmail');
     const gradeSelect = document.getElementById('playerGrade');
     const name = (nameInput?.value || '').trim();
+    const email = (emailInput?.value || '').trim();
     const grade = (gradeSelect?.value || '').trim();
 
     if (!name) {
@@ -75,9 +79,11 @@ if (playerForm && playerModal) {
 
     // Guardar en variables globales y sesión
     window.playerName = name;
+    window.playerEmail = email || '';
     window.playerGrade = grade;
     try {
       sessionStorage.setItem('playerName', name);
+      if (email) sessionStorage.setItem('playerEmail', email);
       sessionStorage.setItem('playerGrade', grade);
     } catch (_) {}
 
@@ -90,11 +96,14 @@ if (playerForm && playerModal) {
   // Si ya hay datos en sessionStorage, prellenar y permitir comenzar rápido
   try {
     const savedName = sessionStorage.getItem('playerName');
+    const savedEmail = sessionStorage.getItem('playerEmail');
     const savedGrade = sessionStorage.getItem('playerGrade');
     if (savedName && savedGrade) {
       const nameInput = document.getElementById('playerName');
+      const emailInput = document.getElementById('playerEmail');
       const gradeSelect = document.getElementById('playerGrade');
       if (nameInput) nameInput.value = savedName;
+      if (emailInput && savedEmail) emailInput.value = savedEmail;
       if (gradeSelect) gradeSelect.value = savedGrade;
     }
   } catch (_) {}
