@@ -136,6 +136,8 @@ import './juegoTh.scss';
     <script is:inline type="text/javascript" src="/js/utils/three.min.js"></script>
     <script is:inline type="text/javascript" src="/js/game.js"></script>
     <script is:inline type="text/javascript" src="/js/modal.js"></script>
+    <!-- Google Identity Services para Sign-In (se carga condicionalmente si hay GOOGLE_CLIENT_ID) -->
+    <script is:inline src="https://accounts.google.com/gsi/client" async defer></script>
     <script is:inline type="module" src="/js/main.js"></script>
   </head>
 </html>
@@ -211,7 +213,9 @@ import './juegoTh.scss';
           style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;"
         />
 
-        <label for="playerEmail" style="font-weight: 600;">Correo de Google (opcional)</label>
+        <label for="playerEmail" style="font-weight: 600;"
+          >Correo de Google (opcional)</label
+        >
         <input
           id="playerEmail"
           name="playerEmail"
@@ -220,6 +224,13 @@ import './juegoTh.scss';
           placeholder="ejemplo@colegio.edu.co"
           style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;"
         />
+
+        <!-- Botón opcional de Google Sign-In (se mostrará si se configura GOOGLE_CLIENT_ID) -->
+        <div id="googleSignIn" style="margin: 4px 0 8px 0;"></div>
+        <small style="color:#666;"
+          >Puedes escribir tu correo manualmente o usar "Acceder con Google" si está
+          disponible.</small
+        >
 
         <label for="playerGrade" style="font-weight: 600;">Grado</label>
         <select

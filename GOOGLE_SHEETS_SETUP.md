@@ -202,15 +202,16 @@ import('./js/sheets.js').then((m) => m.downloadLocalResults());
 ---
 
 ## 🎓 Uso Educativo
+
 ---
 
 ## 📧 (Opcional) Capturar el correo automáticamente
 
 Tienes dos alternativas para llenar la columna Email:
 
-1) Solicitarlo en el juego (ya viene implementado como campo opcional en el formulario de inicio). Más simple, no requiere autenticación.
+1. Solicitarlo en el juego (ya viene implementado como campo opcional en el formulario de inicio). Más simple, no requiere autenticación.
 
-2) Automático con Google Workspace (requiere dominio escolar):
+2. Automático con Google Workspace (requiere dominio escolar):
    - Despliega el Web App como:
      - Ejecutar como: Usuario que accede a la aplicación
      - Quién tiene acceso: Cualquiera en tu organización

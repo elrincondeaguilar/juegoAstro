@@ -296,7 +296,8 @@ function getRecommendations() {
 
   // Mostrar resultado con estilo especial para nota máxima
   const studentIdentityParts = [];
-  if (window.playerName) studentIdentityParts.push(`<strong>${window.playerName}</strong>`);
+  if (window.playerName)
+    studentIdentityParts.push(`<strong>${window.playerName}</strong>`);
   if (window.playerGrade) studentIdentityParts.push(`<em>${window.playerGrade}</em>`);
   if (window.playerEmail) studentIdentityParts.push(`<code>${window.playerEmail}</code>`);
   const studentLine =

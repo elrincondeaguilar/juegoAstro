@@ -10,11 +10,12 @@ https://github.com/user-attachments/assets/6a93d420-6dce-428f-90fa-12762deb749b
 
 ## ✨ Características principales
 
-- Inicio con formulario del estudiante: nombre y grado (11-1, 11-2, 11-3) obligatorio para jugar.
+- **🔐 Inicio de sesión con Google** (opcional): Los estudiantes pueden acceder con su cuenta de Google para auto-completar nombre y email. Ver `GOOGLE_SIGNIN_SETUP.md`.
+- Inicio con formulario del estudiante: nombre, email (opcional) y grado (11-1, 11-2, 11-3) obligatorio para jugar.
 - Quiz de 5 preguntas aleatorias desde `public/js/questions.json` con resultados simplificados.
 - Cálculo de nota en escala 1–5 y celebración especial en puntuación perfecta.
-- Reinicio controlado: el botón “Reiniciar” detiene el juego, muestra nuevamente el formulario y comienza solo tras enviarlo.
-- Resultados enviados a Google Sheets (Apps Script) + respaldo local automático y exportación CSV.
+- Reinicio controlado: el botón "Reiniciar" detiene el juego, muestra nuevamente el formulario y comienza solo tras enviarlo.
+- Resultados enviados a Google Sheets (Apps Script) incluyendo email + respaldo local automático y exportación CSV.
 - Página de resultados local en `/resultados.html` para consultar, exportar o limpiar el respaldo.
 - Página de inicio configurada para cargar el juego directamente e inclusión de página 404 personalizada.
 
@@ -30,33 +31,50 @@ npm run dev
 
 El proyecto usa Astro. Por defecto abre en `http://localhost:4321`.
 
-## 🔌 Integración con Google Sheets
+## � Inicio de Sesión con Google (Opcional)
+
+El juego soporta autenticación con Google para auto-completar nombre y email del estudiante. Para activarlo:
+
+1. Sigue la guía completa en `GOOGLE_SIGNIN_SETUP.md`
+2. Configura tu `GOOGLE_CLIENT_ID` en `public/js/var.env.js`
+3. El botón "Acceder con Google" aparecerá automáticamente en el formulario
+
+**Beneficios:**
+- ✅ Auto-completa nombre y email verificado
+- ✅ Más rápido y seguro
+- ✅ Los estudiantes pueden usar su cuenta institucional
+
+Si no configuras Google Sign-In, los estudiantes pueden escribir su email manualmente (campo opcional).
+
+## �🔌 Integración con Google Sheets
 
 El proyecto incluye una integración lista para usar con Google Apps Script. Sigue la guía detallada en `GOOGLE_SHEETS_SETUP.md` para:
 
-1) Crear la hoja con encabezados sugeridos.
-2) Crear y desplegar el Web App (doGet/doPost).
-3) Configurar la URL del Web App en `public/js/sheets.js` (const `SHEET_WEB_APP_URL`).
-4) Probar el flujo completando un quiz y verificando que se agregue una fila.
+1. Crear la hoja con encabezados sugeridos (incluye columna Email).
+2. Crear y desplegar el Web App (doGet/doPost).
+3. Configurar la URL del Web App en `public/js/sheets.js` (const `SHEET_WEB_APP_URL`).
+4. Probar el flujo completando un quiz y verificando que se agregue una fila.
 
 Notas importantes:
+
 - Si no configuras la URL, los resultados se guardan en respaldo local automáticamente.
-- El envío se hace en modo “no-cors” para evitar preflight; el Apps Script debe estar desplegado como “Cualquier usuario” y “Ejecutar como: Yo”.
+- El envío se hace en modo "no-cors" para evitar preflight; el Apps Script debe estar desplegado como "Cualquier usuario" y "Ejecutar como: Yo".
+- Los datos guardados incluyen: Fecha, Nombre, Email, Grado, Correctas, Total, Porcentaje, Nota, Respuestas.
 
 ## 📄 Resultados locales y visor
 
 - Los resultados se guardan en el navegador cuando no hay conexión o si Sheets no está configurado.
 - Abre `http://localhost:4321/resultados.html` durante el desarrollo (o `/resultados.html` en producción) para:
-	- Ver estadísticas rápidas.
-	- Exportar a CSV.
-	- Limpiar el respaldo local.
+  - Ver estadísticas rápidas.
+  - Exportar a CSV.
+  - Limpiar el respaldo local.
 
 ## 🧭 Flujo del juego
 
-1) Al entrar, verás un formulario para Nombre y Grado. Tras enviarlo y cargar las preguntas, el juego inicia.
-2) Durante el juego se muestran preguntas; al finalizar, aparece el modal de resultados con la nota y el resumen.
-3) Los resultados se envían a Sheets (si está configurado) y siempre se respaldan localmente.
-4) Al pulsar “Reiniciar”, el juego se detiene y vuelve a pedir Nombre y Grado para el siguiente estudiante.
+1. Al entrar, verás un formulario para Nombre y Grado. Tras enviarlo y cargar las preguntas, el juego inicia.
+2. Durante el juego se muestran preguntas; al finalizar, aparece el modal de resultados con la nota y el resumen.
+3. Los resultados se envían a Sheets (si está configurado) y siempre se respaldan localmente.
+4. Al pulsar “Reiniciar”, el juego se detiene y vuelve a pedir Nombre y Grado para el siguiente estudiante.
 
 ## 🛠️ Estructura y archivos relevantes
 
@@ -67,21 +85,23 @@ Notas importantes:
 - `public/js/modal.js`: Lógica de preguntas y resultados.
 - `public/js/questions.json`: Banco de preguntas.
 - `public/js/sheets.js`: Envío a Google Sheets y respaldo local/CSV.
+- `public/js/var.env.js`: Variables de configuración (API URL, Google Client ID).
 - `public/resultados.html`: Visor de resultados locales.
 - `GOOGLE_SHEETS_SETUP.md`: Guía paso a paso para configurar Google Sheets.
+- `GOOGLE_SIGNIN_SETUP.md`: Guía paso a paso para configurar inicio de sesión con Google.
 
 ## 🧞 Commands
 
 Todos los comandos se ejecutan desde la raíz del proyecto, en un terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Instala dependencias                             |
-| `npm run dev`             | Inicia el servidor en `localhost:4321`           |
-| `npm run build`           | Construye producción en `./dist/`                 |
-| `npm run preview`         | Previsualiza el build localmente                  |
-| `npm run astro ...`       | Comandos CLI como `astro add`, `astro check`     |
-| `npm run astro -- --help` | Ayuda del CLI de Astro                           |
+| Command                   | Action                                       |
+| :------------------------ | :------------------------------------------- |
+| `npm install`             | Instala dependencias                         |
+| `npm run dev`             | Inicia el servidor en `localhost:4321`       |
+| `npm run build`           | Construye producción en `./dist/`            |
+| `npm run preview`         | Previsualiza el build localmente             |
+| `npm run astro ...`       | Comandos CLI como `astro add`, `astro check` |
+| `npm run astro -- --help` | Ayuda del CLI de Astro                       |
 
 ## 🧯 Solución de problemas
 
@@ -91,4 +111,8 @@ Todos los comandos se ejecutan desde la raíz del proyecto, en un terminal:
 
 ## 🔐 Privacidad
 
-Solo se guardan: fecha, nombre, grado, aciertos, total, porcentaje, nota y un resumen de respuestas. El respaldo local se almacena en el navegador del equipo donde se juega y puede exportarse/limpiarse desde `/resultados.html`.
+Solo se guardan: fecha, nombre, email (opcional), grado, aciertos, total, porcentaje, nota y un resumen de respuestas. 
+
+- Si usas Google Sign-In: Solo se accede a nombre y email (perfil básico). **No se comparte la contraseña**.
+- El respaldo local se almacena en el navegador del equipo donde se juega y puede exportarse/limpiarse desde `/resultados.html`.
+- Los datos en Google Sheets solo son visibles para el profesor que configuró el Web App.
