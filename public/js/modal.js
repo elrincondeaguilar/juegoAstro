@@ -72,16 +72,16 @@ function showQuestionModal(selectedQuestion, callback) {
 
     button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
     button.className = 'option';
-    
-    // Asegurar que el botón sea interactivo
-    button.style.pointerEvents = 'auto';
-    button.style.touchAction = 'manipulation';
 
-    button.addEventListener('click', (e) => {
-      e.stopPropagation(); // Prevenir que el evento burbujee
-      const isLastQuestion = currentQuestionIndex === questions.length - 1;
-
+    button.addEventListener('click', () => {
+      // Guardar la respuesta ANTES de incrementar el índice
       saveAnswer(index, selectedQuestion);
+      
+      // Incrementar el índice DESPUÉS de guardar
+      currentQuestionIndex++;
+      
+      // Verificar si era la última pregunta (DESPUÉS de incrementar)
+      const wasLastQuestion = currentQuestionIndex >= questions.length;
 
       /* ANIMACIONES PARA EL MODAL DE PREGUNTAS (SALIDA) */
 
@@ -96,14 +96,21 @@ function showQuestionModal(selectedQuestion, callback) {
         modal.classList.remove('animate__fadeOut');
         modal.style.display = 'none';
 
-        // Solo ejecutar callback si NO es la última pregunta
-        if (!isLastQuestion) {
+        // Si NO era la última pregunta, continuar el juego
+        if (!wasLastQuestion) {
           callback();
+        } else {
+          // Si era la última, mostrar resultados
+          // Marcar que las preguntas fueron completadas
+          if (typeof questionsCompleted !== 'undefined') {
+            questionsCompleted = true;
+          }
+          getRecommendations();
+          showRecommendationsModal(gameCallback);
+          // Resetear para la próxima vez
+          resetAnswers();
         }
-        // Si es la última pregunta, el callback se ejecutará cuando se cierre el modal de recomendaciones
       }, 300);
-
-      currentQuestionIndex++;
     });
     optionsContainer.appendChild(button);
   });
@@ -119,19 +126,6 @@ function saveAnswer(selectedIndex, questionObj) {
     isCorrect: selectedIndex === questionObj.correctAnswer,
   };
   answers.push(answer);
-
-  if (currentQuestionIndex === questions.length - 1) {
-    // Marcar que las preguntas fueron completadas para desactivar futuras colisiones
-    if (typeof questionsCompleted !== 'undefined') {
-      questionsCompleted = true;
-    }
-
-    getRecommendations(); // Generar las recomendaciones basadas en las respuestas
-    showRecommendationsModal(gameCallback); // Mostrar el modal con las recomendaciones y pasar el callback
-
-    // Resetear para la próxima vez
-    resetAnswers();
-  }
 }
 
 function showRecommendationsModal(gameCallback) {

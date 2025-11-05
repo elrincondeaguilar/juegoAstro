@@ -66,8 +66,6 @@ function handleGoogleSignIn(response) {
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const payload = JSON.parse(atob(base64));
 
-    console.log('✅ Usuario autenticado con Google:', payload);
-
     // Autocompletar los campos con la info de Google
     const nameInput = document.getElementById('playerName');
     const emailInput = document.getElementById('playerEmail');
@@ -86,9 +84,6 @@ function handleGoogleSignIn(response) {
     if (gradeSelect) {
       gradeSelect.focus();
     }
-
-    // Mostrar mensaje de éxito
-    console.log(`👤 ${payload.name} (${payload.email})`);
   } catch (error) {
     console.error('❌ Error al procesar respuesta de Google:', error);
     alert('Hubo un error al iniciar sesión con Google. Por favor, intenta manualmente.');

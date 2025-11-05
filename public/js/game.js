@@ -132,13 +132,8 @@ function createScene() {
   camera.position.y = game.planeDefaultHeight;
   //camera.lookAt(new THREE.Vector3(0, 400, 0));
 
-  renderer = new THREE.WebGLRenderer({ 
-    alpha: true, 
-    antialias: true,
-    powerPreference: 'high-performance' // Mejor rendimiento en móviles
-  });
+  renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(WIDTH, HEIGHT);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Optimizar para móviles
 
   renderer.shadowMap.enabled = true;
 
@@ -201,7 +196,6 @@ function handleWindowResize() {
   HEIGHT = window.innerHeight;
   WIDTH = window.innerWidth;
   renderer.setSize(WIDTH, HEIGHT);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Optimizar para móviles
   camera.aspect = WIDTH / HEIGHT;
   camera.updateProjectionMatrix();
 }
@@ -214,20 +208,9 @@ function handleMouseMove(event) {
 
 function handleTouchMove(event) {
   event.preventDefault();
-  if (event.touches && event.touches.length > 0) {
-    var tx = -1 + (event.touches[0].clientX / WIDTH) * 2;
-    var ty = 1 - (event.touches[0].clientY / HEIGHT) * 2;
-    mousePos = { x: tx, y: ty };
-  }
-}
-
-function handleTouchStart(event) {
-  event.preventDefault();
-  if (event.touches && event.touches.length > 0) {
-    var tx = -1 + (event.touches[0].clientX / WIDTH) * 2;
-    var ty = 1 - (event.touches[0].clientY / HEIGHT) * 2;
-    mousePos = { x: tx, y: ty };
-  }
+  var tx = -1 + (event.touches[0].pageX / WIDTH) * 2;
+  var ty = 1 - (event.touches[0].pageY / HEIGHT) * 2;
+  mousePos = { x: tx, y: ty };
 }
 
 function handleTouchEnd(event) {
@@ -1167,7 +1150,6 @@ function init(event) {
   createParticles();
 
   document.addEventListener('mousemove', handleMouseMove, false);
-  document.addEventListener('touchstart', handleTouchStart, { passive: false });
   document.addEventListener('touchmove', handleTouchMove, { passive: false });
   //document.addEventListener('mouseup', handleMouseUp, false); <--- Encargado de hacer el handle click para reiniciar el juego
   document.addEventListener('touchend', handleTouchEnd, false);
