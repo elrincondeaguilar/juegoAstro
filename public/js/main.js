@@ -28,7 +28,7 @@ function initGoogleSignIn() {
   const checkGoogle = setInterval(() => {
     if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
       clearInterval(checkGoogle);
-      
+
       google.accounts.id.initialize({
         client_id: GOOGLE_CLIENT_ID,
         callback: handleGoogleSignIn,
@@ -60,36 +60,35 @@ function handleGoogleSignIn(response) {
   try {
     // El JWT viene en response.credential
     const jwt = response.credential;
-    
+
     // Decodificar el payload del JWT (es la parte del medio)
     const base64Url = jwt.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const payload = JSON.parse(atob(base64));
-    
+
     console.log('✅ Usuario autenticado con Google:', payload);
-    
+
     // Autocompletar los campos con la info de Google
     const nameInput = document.getElementById('playerName');
     const emailInput = document.getElementById('playerEmail');
-    
+
     if (nameInput && payload.name) {
       nameInput.value = payload.name;
     }
-    
+
     if (emailInput && payload.email) {
       emailInput.value = payload.email;
       emailInput.disabled = true; // Bloquear edición del email verificado
     }
-    
+
     // Enfocar en el campo de grado
     const gradeSelect = document.getElementById('playerGrade');
     if (gradeSelect) {
       gradeSelect.focus();
     }
-    
+
     // Mostrar mensaje de éxito
     console.log(`👤 ${payload.name} (${payload.email})`);
-    
   } catch (error) {
     console.error('❌ Error al procesar respuesta de Google:', error);
     alert('Hubo un error al iniciar sesión con Google. Por favor, intenta manualmente.');

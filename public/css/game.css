@@ -1,7 +1,10 @@
 .game-holder {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   background: -webkit-linear-gradient(#e4e0ba, #f7d9aa);
   background: linear-gradient(#e4e0ba, #f7d9aa);
 }
@@ -11,6 +14,7 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
+  touch-action: none;
 }
 
 .header {
@@ -20,6 +24,7 @@
   width: 100%;
   text-align: center;
   pointer-events: none;
+  z-index: 10;
 }
 
 .header h1 {
@@ -47,6 +52,22 @@
   letter-spacing: 1em;
   text-transform: uppercase;
   color: #d6483b;
+}
+
+/* Responsive para móviles */
+@media screen and (max-width: 768px) {
+  .header {
+    top: 4vh;
+  }
+
+  .header h1 {
+    font-size: 2.5em;
+  }
+
+  .header h2 {
+    font-size: 0.5em;
+    letter-spacing: 0.3em;
+  }
 }
 
 .score {
@@ -133,13 +154,18 @@
   width: 100%;
   text-align: center;
   text-transform: uppercase;
+  z-index: 10;
 }
 
 .message--replay {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 500;
   font-size: 15px;
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: none;
   text-indent: 0.5em;
   letter-spacing: 0.5em;
@@ -164,7 +190,22 @@
 .message--instructions span {
   display: block;
   color: #d6483b;
-  white-space: nowrap;
+  white-space: normal;
+}
+
+/* Responsive para móviles */
+@media screen and (max-width: 768px) {
+  .message--instructions {
+    font-size: 0.65em;
+    bottom: 4vh;
+    padding: 0 10px;
+  }
+
+  .message--replay {
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    padding: 20px;
+  }
 }
 
 @-webkit-keyframes blinking {
@@ -195,23 +236,46 @@
   }
 }
 
-@media screen and (max-width: 40em) {
+/* Media queries consolidadas */
+@media screen and (max-width: 640px) {
   .header {
-    font-size: 0.75em;
-    top: 6.5em;
+    font-size: 0.65em;
+    top: 3vh;
+  }
+
+  .header h1 {
+    font-size: 2em;
   }
 
   .header h2 {
-    letter-spacing: 0.65em;
+    letter-spacing: 0.4em;
+    font-size: 0.45em;
+  }
+
+  .score {
+    margin: 1em 0 0;
+    font-size: 0.85em;
+  }
+
+  .score__content {
+    padding: 0 0.5em;
+  }
+
+  .message--instructions {
+    font-size: 0.55em;
+    bottom: 2vh;
+    line-height: 1.4;
   }
 }
 
 .credits {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   left: 10px;
   color: rgba(15, 14, 14, 0.632);
   text-decoration: none;
+  z-index: 10;
+  font-size: 0.85em;
 
   &:hover {
     color: rgba(15, 14, 14, 0.868);
@@ -219,6 +283,14 @@
     & > span {
       color: red;
     }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .credits {
+    font-size: 0.7em;
+    bottom: 5px;
+    left: 5px;
   }
 }
 

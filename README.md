@@ -40,6 +40,7 @@ El juego soporta autenticación con Google para auto-completar nombre y email de
 3. El botón "Acceder con Google" aparecerá automáticamente en el formulario
 
 **Beneficios:**
+
 - ✅ Auto-completa nombre y email verificado
 - ✅ Más rápido y seguro
 - ✅ Los estudiantes pueden usar su cuenta institucional
@@ -111,7 +112,7 @@ Todos los comandos se ejecutan desde la raíz del proyecto, en un terminal:
 
 ## 🔐 Privacidad
 
-Solo se guardan: fecha, nombre, email (opcional), grado, aciertos, total, porcentaje, nota y un resumen de respuestas. 
+Solo se guardan: fecha, nombre, email (opcional), grado, aciertos, total, porcentaje, nota y un resumen de respuestas.
 
 - Si usas Google Sign-In: Solo se accede a nombre y email (perfil básico). **No se comparte la contraseña**.
 - El respaldo local se almacena en el navegador del equipo donde se juega y puede exportarse/limpiarse desde `/resultados.html`.

@@ -1,15 +1,56 @@
 @import 'animate.css';
 
-body {
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+  position: fixed;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+  touch-action: pan-y;
+}
+
+/* Prevenir el bounce en iOS */
+html,
+body {
+  overscroll-behavior-y: none;
+}
+
+/* Mejorar rendimiento en móviles */
+canvas {
+  display: block;
+  touch-action: none;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .modal {
   display: none; /* Oculto por defecto */
   z-index: 1000;
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: rgba(0, 0, 0, 0.4);
   font-family: 'Source Sans Pro', sans-serif;
 
@@ -17,17 +58,20 @@ body {
   transition: all 0.5s ease;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .modal-content {
   background-color: #ffffffbb;
-  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 100%;
   max-width: 500px;
   text-align: center;
   border-radius: 8px;
+  margin: auto;
+  max-height: 90vh;
+  overflow-y: auto;
 
   p {
     color: rgba(0, 0, 0, 0.726);
@@ -36,6 +80,82 @@ body {
   h2 {
     color: rgba(0, 0, 0, 0.726);
     font-size: 1em;
+  }
+}
+
+/* Estilos para inputs y formularios */
+input,
+select,
+button {
+  font-size: 16px; /* Previene zoom en iOS */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #68c3c0;
+  box-shadow: 0 0 0 2px rgba(104, 195, 192, 0.2);
+}
+
+/* Responsive para móviles */
+@media screen and (max-width: 768px) {
+  .modal {
+    padding: 10px;
+    align-items: flex-start;
+    padding-top: 5vh;
+  }
+
+  .modal-content {
+    padding: 15px;
+    max-width: 95%;
+    max-height: 85vh;
+    font-size: 0.95em;
+  }
+
+  .modal-content h2 {
+    font-size: 1.2em;
+    margin: 0 0 10px 0;
+  }
+
+  .modal-content p {
+    font-size: 0.9em;
+    margin: 0 0 15px 0;
+  }
+
+  input,
+  select {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  label {
+    font-size: 0.9em;
+  }
+
+  small {
+    font-size: 0.85em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .modal {
+    padding: 5px;
+  }
+
+  .modal-content {
+    padding: 12px;
+    max-width: 98%;
   }
 }
 
@@ -51,15 +171,19 @@ body {
   border-radius: 3px;
   font-size: 1em;
   transition: background-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.options button:hover {
+.options button:hover,
+.options button:active {
   background-color: #56a3a0;
 }
 
 .replay-button {
   padding: 20px;
   width: 350px;
+  max-width: 90%;
   background-color: #68c3c0ce;
   border: none;
   color: white;
@@ -67,8 +191,26 @@ body {
   border-radius: 3px;
   font-size: 16px;
   transition: background-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 
-  &:hover {
+  &:hover,
+  &:active {
     background-color: #44ded9cf;
+  }
+}
+
+/* Responsive para móviles */
+@media screen and (max-width: 768px) {
+  .options button {
+    padding: 14px;
+    font-size: 0.95em;
+    margin: 8px 0;
+  }
+
+  .replay-button {
+    padding: 16px;
+    font-size: 14px;
+    width: 90%;
   }
 }
