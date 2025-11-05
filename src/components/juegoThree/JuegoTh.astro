@@ -7,13 +7,7 @@ import './juegoTh.scss';
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
-    />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Traventhia descubre tu mundo</title>
     <meta name="description" content="The" />
     <meta name="keywords" content="The" />
@@ -206,37 +200,40 @@ import './juegoTh.scss';
   <div id="playerModal" class="modal" style="display: flex;">
     <div class="modal-content">
       <h2>👋 Antes de empezar</h2>
-      <p>Por favor ingresa tu nombre y el grado al que perteneces.</p>
+      <p>Por favor inicia sesión con tu cuenta de Google para continuar.</p>
       <form id="playerForm" style="display: grid; gap: 12px; text-align: left;">
+        
+        <!-- Botón obligatorio de Google Sign-In -->
+        <div id="googleSignIn" style="margin: 8px 0 16px 0;"></div>
+        <small style="color:#666; margin-top: -8px;"
+          >Debes iniciar sesión con Google para acceder al juego.</small
+        >
+
         <label for="playerName" style="font-weight: 600;">Nombre del estudiante</label>
         <input
           id="playerName"
           name="playerName"
           type="text"
           required
+          disabled
           maxlength="40"
-          placeholder="Ej: Juan Pérez"
-          style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;"
+          placeholder="Se completará con tu cuenta de Google"
+          style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; background-color: #f5f5f5;"
         />
 
         <label for="playerEmail" style="font-weight: 600;"
-          >Correo de Google (opcional)</label
+          >Correo de Google</label
         >
         <input
           id="playerEmail"
           name="playerEmail"
           type="email"
+          required
+          disabled
           maxlength="80"
-          placeholder="ejemplo@colegio.edu.co"
-          style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;"
+          placeholder="Se completará con tu cuenta de Google"
+          style="padding: 10px; border: 1px solid #ccc; border-radius: 6px; background-color: #f5f5f5;"
         />
-
-        <!-- Botón opcional de Google Sign-In (se mostrará si se configura GOOGLE_CLIENT_ID) -->
-        <div id="googleSignIn" style="margin: 4px 0 8px 0;"></div>
-        <small style="color:#666;"
-          >Puedes escribir tu correo manualmente o usar "Acceder con Google" si está
-          disponible.</small
-        >
 
         <label for="playerGrade" style="font-weight: 600;">Grado</label>
         <select
@@ -261,11 +258,11 @@ import './juegoTh.scss';
     </div>
   </div>
 
-  <!-- Modal de Preguntas -->
-  <div id="questionModal" class="modal">
-    <div class="modal-content">
-      <h2></h2>
+  <!-- modal -->
+  <div id="questionModal" class="modal animate__animated">
+    <div class="modal-content animate__animated">
       <p></p>
+      <h2></h2>
       <div class="options">
         <button class="option"></button>
         <button class="option"></button>
@@ -282,6 +279,19 @@ import './juegoTh.scss';
   >
     Creditos <span>❤</span>
   </a>
+
+  <div id="questionModal" class="modal">
+    <div class="modal-content">
+      <h2></h2>
+      <p></p>
+      <div class="options">
+        <button class="option"></button>
+        <button class="option"></button>
+        <button class="option"></button>
+        <button class="option"></button>
+      </div>
+    </div>
+  </div>
   <!-- Modal para Resultados Académicos -->
   <div id="recommendationsModal" style="display:none;" class="modal">
     <div class="modal-content">

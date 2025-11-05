@@ -72,11 +72,20 @@ function handleGoogleSignIn(response) {
 
     if (nameInput && payload.name) {
       nameInput.value = payload.name;
+      nameInput.disabled = true; // Bloquear edición del nombre verificado
     }
 
     if (emailInput && payload.email) {
       emailInput.value = payload.email;
       emailInput.disabled = true; // Bloquear edición del email verificado
+    }
+
+    // Habilitar el botón de submit
+    const submitBtn = document.querySelector('#playerForm button[type="submit"]');
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+      submitBtn.style.cursor = 'pointer';
     }
 
     // Enfocar en el campo de grado
@@ -122,17 +131,23 @@ if (replayBtn) {
       const nameInput = document.getElementById('playerName');
       const gradeSelect = document.getElementById('playerGrade');
       const emailInput = document.getElementById('playerEmail');
-      if (nameInput) nameInput.value = '';
+      const submitBtn = document.querySelector('#playerForm button[type="submit"]');
+      
+      if (nameInput) {
+        nameInput.value = '';
+        nameInput.disabled = true; // Mantener deshabilitado hasta nueva autenticación
+      }
       if (gradeSelect) gradeSelect.value = '';
       if (emailInput) {
         emailInput.value = '';
-        emailInput.disabled = false; // Re-habilitar por si estaba bloqueado por Google Sign-In
+        emailInput.disabled = true; // Mantener deshabilitado hasta nueva autenticación
       }
-
-      // Enfocar en el campo de nombre
-      setTimeout(() => {
-        if (nameInput) nameInput.focus();
-      }, 300);
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.5';
+        submitBtn.style.cursor = 'not-allowed';
+        submitBtn.title = 'Debes iniciar sesión con Google primero';
+      }
     }
 
     // Nota: El juego NO iniciará hasta que el usuario complete
@@ -144,6 +159,15 @@ if (replayBtn) {
 const playerForm = document.getElementById('playerForm');
 const playerModal = document.getElementById('playerModal');
 if (playerForm && playerModal) {
+  // Deshabilitar el botón de submit por defecto
+  const submitBtn = playerForm.querySelector('button[type="submit"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.5';
+    submitBtn.style.cursor = 'not-allowed';
+    submitBtn.title = 'Debes iniciar sesión con Google primero';
+  }
+
   playerForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const nameInput = document.getElementById('playerName');
@@ -155,6 +179,10 @@ if (playerForm && playerModal) {
 
     if (!name) {
       nameInput?.focus();
+      return;
+    }
+    if (!email) {
+      alert('Debes iniciar sesión con Google para continuar');
       return;
     }
     if (!grade) {
