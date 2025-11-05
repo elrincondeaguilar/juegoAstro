@@ -72,8 +72,13 @@ function showQuestionModal(selectedQuestion, callback) {
 
     button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
     button.className = 'option';
+    
+    // Asegurar que el botón sea interactivo
+    button.style.pointerEvents = 'auto';
+    button.style.touchAction = 'manipulation';
 
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevenir que el evento burbujee
       const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
       saveAnswer(index, selectedQuestion);

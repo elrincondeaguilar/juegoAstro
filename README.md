@@ -10,7 +10,8 @@ https://github.com/user-attachments/assets/6a93d420-6dce-428f-90fa-12762deb749b
 
 ## ✨ Características principales
 
-- **🔐 Inicio de sesión con Google** (opcional): Los estudiantes pueden acceder con su cuenta de Google para auto-completar nombre y email. Ver `GOOGLE_SIGNIN_SETUP.md`.
+- **� Totalmente responsive**: Funciona perfectamente en móviles sin scrolls no deseados. Ver `MOBILE_OPTIMIZATION.md`.
+- **�🔐 Inicio de sesión con Google** (opcional): Los estudiantes pueden acceder con su cuenta de Google para auto-completar nombre y email. Ver `GOOGLE_SIGNIN_SETUP.md`.
 - Inicio con formulario del estudiante: nombre, email (opcional) y grado (11-1, 11-2, 11-3) obligatorio para jugar.
 - Quiz de 5 preguntas aleatorias desde `public/js/questions.json` con resultados simplificados.
 - Cálculo de nota en escala 1–5 y celebración especial en puntuación perfecta.
@@ -90,6 +91,7 @@ Notas importantes:
 - `public/resultados.html`: Visor de resultados locales.
 - `GOOGLE_SHEETS_SETUP.md`: Guía paso a paso para configurar Google Sheets.
 - `GOOGLE_SIGNIN_SETUP.md`: Guía paso a paso para configurar inicio de sesión con Google.
+- `MOBILE_OPTIMIZATION.md`: Documentación completa de optimizaciones para dispositivos móviles.
 
 ## 🧞 Commands
 
@@ -106,9 +108,11 @@ Todos los comandos se ejecutan desde la raíz del proyecto, en un terminal:
 
 ## 🧯 Solución de problemas
 
-- No se guardan datos en Sheets: Revisa `public/js/sheets.js` (URL) y permisos del Web App (Ejecutar como: Yo, Acceso: Cualquier usuario). Consulta `GOOGLE_SHEETS_SETUP.md`.
-- Error de CORS o 401/403: Vuelve a implementar el Apps Script con la configuración correcta.
-- El avión no aparece tras reiniciar: asegúrate de recargar si tocaste archivos del juego; el flujo normal ya reinicia limpiamente.
+- **No se guardan datos en Sheets**: Revisa `public/js/sheets.js` (URL) y permisos del Web App (Ejecutar como: Yo, Acceso: Cualquier usuario). Consulta `GOOGLE_SHEETS_SETUP.md`.
+- **Error de CORS o 401/403**: Vuelve a implementar el Apps Script con la configuración correcta.
+- **El avión no aparece tras reiniciar**: asegúrate de recargar si tocaste archivos del juego; el flujo normal ya reinicia limpiamente.
+- **Scrolls no deseados en móviles**: Las optimizaciones ya están implementadas. Ver `MOBILE_OPTIMIZATION.md` para detalles.
+- **El juego va lento en móvil**: Cierra otras apps, limpia caché del navegador. Dispositivos muy antiguos pueden tener problemas de rendimiento.
 
 ## 🔐 Privacidad
 
