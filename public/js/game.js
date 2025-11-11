@@ -214,6 +214,15 @@ function handleTouchMove(event) {
 }
 
 function handleTouchEnd(event) {
+  // Mantener la posición vertical del avión al soltar el dedo
+  // Solo actualizamos mousePos.y para que el avión no se centre verticalmente
+  // No tocamos mousePos.x para mantener el zoom de la cámara
+  if (airplane && airplane.mesh) {
+    // Invertir la normalización de Y
+    mousePos.y =
+      ((airplane.mesh.position.y - game.planeDefaultHeight) / game.planeAmpHeight) * 0.75;
+  }
+
   if (game.status == 'waitingReplay') {
     resetGame();
     hideReplay();

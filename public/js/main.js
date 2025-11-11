@@ -200,10 +200,16 @@ if (playerForm && playerModal) {
       sessionStorage.setItem('playerGrade', grade);
     } catch (_) {}
 
-    // Ocultar modal de inicio
-    playerModal.style.display = 'none';
-    playerReady = true;
-    tryStartGame();
+    // Cargar preguntas según el grado seleccionado
+    getQuestions((res) => {
+      questions = res; // variable global usada por modal.js
+      questionsLoaded = true;
+      
+      // Ocultar modal de inicio
+      playerModal.style.display = 'none';
+      playerReady = true;
+      tryStartGame();
+    });
   });
 
   // Si ya hay datos en sessionStorage, prellenar y permitir comenzar rápido
@@ -222,9 +228,5 @@ if (playerForm && playerModal) {
   } catch (_) {}
 }
 
-// Cargar preguntas (5 aleatorias desde questions.json)
-getQuestions((res) => {
-  questions = res; // variable global usada por modal.js
-  questionsLoaded = true;
-  tryStartGame();
-});
+// Las preguntas se cargan después de que el usuario selecciona su grado
+// Ver línea ~205 dentro del submit del playerForm

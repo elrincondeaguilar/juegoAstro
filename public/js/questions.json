@@ -1,112 +1,201 @@
-[
+{
+    "11-1": [
     {
         "id": "1",
-        "category": "Sonido",
-        "question": "Movimiento Armonico Simple",
+        "category": "Luz",
+        "question": "En el experimento donde se introduce una tarjeta de colores en agua, los colores parecen desaparecer o cambiar. ¿A qué se debe este fenómeno?",
         "options": [
-            "La frecuencia de la onda sonora",
-            "La temperatura del aire",
-            "El tipo de material del tubo"
+            "A que el agua absorbe completamente la luz visible",
+            "A la refracción y dispersión de la luz que altera cómo percibimos los colores bajo el agua",
+            "A que el papel pierde su pigmento al contacto con el agua",
+            "A que el agua refleja toda la luz hacia el fondo"
         ],
         "correctAnswer": 1
     },
     {
         "id": "2",
-        "category": "Sonido",
-        "question": "En el experimento de la resonancia de un tubo de órgano, ¿qué ocurre cuando la frecuencia de la fuente coincide con la frecuencia natural del tubo?",
+        "category": "Luz",
+        "question": "En el experimento del lápiz dentro del vaso con agua, ¿por qué el lápiz parece doblarse?",
         "options": [
-            "Se produce una interferencia destructiva",
-            "La intensidad sonora disminuye",
-            "Se produce una amplificación del sonido"
+            "Porque el agua refleja la luz",
+            "Porque la luz cambia de dirección al pasar de un medio a otro",
+            "Porque el lápiz se distorsiona ópticamente por el vidrio",
+            "Porque la densidad del agua es mayor que la del aire"
         ],
-        "correctAnswer": 2
+        "correctAnswer": 1
     },
     {
         "id": "3",
         "category": "Sonido",
-        "question": "En un experimento con diferentes medios (aire, agua, metal), ¿cómo varía la velocidad del sonido en cada uno de ellos?",
+        "question": "En el experimento del tubo de Rubens, ¿qué demuestra la variación de altura de las llamas al emitir un sonido?",
         "options": [
-            "Es más rápida en el aire que en el agua",
-            "Es más rápida en el agua que en el metal",
-            "Es más rápida en el metal que en el agua"
-        ],
-        "correctAnswer": 2
-    },
-    {
-        "id": "4",
-        "category": "Luz",
-        "question": "En el experimento de la descomposición de la luz blanca, ¿qué ocurre cuando la luz pasa a través de un prisma?",
-        "options": [
-            "Se dispersa en varios colores",
-            "Se refleja en un solo color",
-            "Se refracta sin cambiar su color"
+            "Que las ondas sonoras pueden visualizarse a través de variaciones de presión",
+            "Que el gas se calienta de forma uniforme en el tubo",
+            "Que el sonido solo se transmite por el aire",
+            "Que las llamas cambian por la temperatura, no por el sonido"
         ],
         "correctAnswer": 0
     },
     {
-        "id": "5",
-        "category": "Luz",
-        "question": "En un experimento de interferencia de luz con dos rendijas, ¿qué se observa en la pantalla?",
+        "id": "4",
+        "category": "Movimiento Armónico Simple",
+        "question": "Durante el movimiento de un resorte, ¿qué tipo de energía se transforma constantemente?",
         "options": [
-            "Un patrón de luz uniforme",
-            "Un patrón de bandas brillantes y oscuras",
-            "Una imagen borrosa de la fuente"
+            "Energía térmica y eléctrica",
+            "Energía potencial elástica y cinética",
+            "Energía química y luminosa",
+            "Energía nuclear y gravitacional"
+        ],
+        "correctAnswer": 1
+    },
+    {
+        "id": "5",
+        "category": "Electromagnetismo",
+        "question": "En el experimento donde se calentaban agujas magnetizadas, ¿qué fenómeno se demuestra?",
+        "options": [
+            "Que el calor aumenta el magnetismo",
+            "Que al calentar un material ferromagnético este pierde su magnetismo",
+            "Que el imán se hace más fuerte con el calor",
+            "Que la temperatura no afecta el magnetismo"
         ],
         "correctAnswer": 1
     },
     {
         "id": "6",
-        "category": "Luz",
-        "question": "En un experimento para medir el índice de refracción de un material, ¿qué factor principal se debe medir?",
+        "category": "Electromagnetismo",
+        "question": "En el experimento del motor eléctrico con aspas de fósforos, ¿qué principio físico se demuestra?",
         "options": [
-            "El ángulo de incidencia y el ángulo de refracción",
-            "La intensidad de la luz reflejada",
-            "El color de la luz utilizada"
+            "Que la corriente eléctrica puede producir movimiento mecánico",
+            "Que el calor activa la rotación de las aspas",
+            "Que el imán genera electricidad por sí mismo",
+            "Que el movimiento genera carga estática"
         ],
         "correctAnswer": 0
     },
     {
         "id": "7",
         "category": "Electromagnetismo",
-        "question": "En un experimento con un solenoide y una corriente eléctrica, ¿qué se observa al aumentar la corriente?",
+        "question": "En el experimento del vaso de aluminio y el imán, ¿qué fenómeno explica el movimiento rotatorio?",
         "options": [
-            "Aumenta la fuerza del campo magnético",
-            "Disminuye la fuerza del campo magnético",
-            "El campo magnético se hace irregular"
+            "Inducción electromagnética y fuerza de Lorentz",
+            "Polarización de la luz",
+            "Resonancia acústica del material",
+            "Vibración mecánica por el contacto del imán"
         ],
         "correctAnswer": 0
     },
     {
         "id": "8",
-        "category": "Electromagnetismo",
-        "question": "En un experimento de inducción electromagnética con un imán y una bobina, ¿qué sucede cuando el imán se mueve rápidamente a través de la bobina?",
+        "category": "Materia y Energía",
+        "question": "¿Qué característica diferencia al plasma de los demás estados de la materia?",
         "options": [
-            "Se induce una corriente en la bobina",
-            "No ocurre ninguna inducción",
-            "El imán pierde su magnetismo"
+            "Las partículas están totalmente neutras",
+            "Contiene partículas ionizadas con carga positiva y negativa",
+            "Es sólido a altas temperaturas",
+            "No conduce electricidad en ningún caso"
         ],
-        "correctAnswer": 0
-    },
-    {
-        "id": "9",
-        "category": "Electromagnetismo",
-        "question": "En un experimento de ley de Faraday, ¿cómo varía la corriente inducida cuando se aumenta la velocidad de cambio del campo magnético?",
-        "options": [
-            "La corriente inducida aumenta",
-            "La corriente inducida disminuye",
-            "La corriente permanece constante"
-        ],
-        "correctAnswer": 0
-    },
-    {
-        "id": "10",
-        "category": "Electromagnetismo",
-        "question": "En un experimento sobre el efecto Hall, ¿qué se mide para determinar la densidad de corriente en un material?",
-        "options": [
-            "El voltaje transversal al flujo de corriente",
-            "La temperatura del material",
-            "La longitud del conductor"
-        ],
-        "correctAnswer": 0
+        "correctAnswer": 1
     }
 ]
+
+,
+    "11-2": [],
+    "11-3": [
+  {
+    "id": "1",
+    "category": "Ondas de sonido",
+    "question": "¿Qué característica fundamental distingue a las ondas de sonido de otros tipos de ondas?",
+    "options": [
+      "Son ondas electromagnéticas que no requieren medio material",
+      "Son ondas longitudinales que necesitan un medio material para propagarse",
+      "Son ondas transversales que se propagan solo en el vacío",
+      "Son ondas estacionarias que no transportan energía"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "2",
+    "category": "Ondas de luz",
+    "question": "¿Por qué las ondas de luz pueden viajar en el vacío a diferencia del sonido?",
+    "options": [
+      "Porque están formadas por moléculas luminosas",
+      "Porque son ondas electromagnéticas que no requieren materia para propagarse",
+      "Porque el vacío transmite mejor las vibraciones mecánicas",
+      "Porque la luz viaja gracias al movimiento de partículas de aire"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "3",
+    "category": "Propagación del sonido",
+    "question": "En el experimento de propagación del sonido, ¿qué demuestra el movimiento de las partículas del medio?",
+    "options": [
+      "Que las partículas se desplazan junto con el sonido",
+      "Que las partículas vibran transmitiendo energía sin desplazarse de lugar",
+      "Que el sonido solo se propaga en el agua",
+      "Que el sonido se refleja sin cambiar de dirección"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "4",
+    "category": "Tubo de Rubens",
+    "question": "En el experimento del tubo de Rubens, ¿qué representan las variaciones en la altura de las llamas?",
+    "options": [
+      "Las zonas de presión constante del gas",
+      "Las ondas estacionarias producidas por el sonido dentro del tubo",
+      "El aumento de temperatura del gas por el fuego",
+      "La disminución del flujo de gas por los orificios"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "5",
+    "category": "Levitación magnética",
+    "question": "¿Qué principio físico permite que un objeto flote mediante levitación magnética?",
+    "options": [
+      "La atracción entre polos magnéticos opuestos",
+      "La repulsión entre campos magnéticos iguales que equilibran el peso del objeto",
+      "El aumento de la densidad del aire por los imanes",
+      "La ionización del aire alrededor del imán"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "6",
+    "category": "Hologramas 3D",
+    "question": "¿Qué propiedad de la luz se manipula para crear imágenes tridimensionales en un holograma?",
+    "options": [
+      "Su frecuencia sonora",
+      "Su longitud de onda y fase para producir interferencia",
+      "Su temperatura y densidad",
+      "Su energía térmica"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "7",
+    "category": "Refracción de la luz",
+    "question": "En el experimento del lápiz en el vaso con agua, ¿por qué el lápiz parece doblarse?",
+    "options": [
+      "Porque la luz cambia de dirección al pasar del aire al agua",
+      "Porque el vidrio amplifica el tamaño del lápiz",
+      "Porque el agua distorsiona el color del objeto",
+      "Porque la luz se refleja completamente en la superficie"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "8",
+    "category": "Propagación de la luz",
+    "question": "¿Qué demuestra el experimento de propagación de la luz?",
+    "options": [
+      "Que la luz puede desviarse fácilmente en un solo medio",
+      "Que la luz viaja en línea recta y puede reflejarse o refractarse",
+      "Que la luz necesita siempre un medio sólido para propagarse",
+      "Que la luz cambia de color al atravesar un material"
+    ],
+    "correctAnswer": 1
+  }
+]
+}
