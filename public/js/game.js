@@ -129,10 +129,7 @@ function createScene() {
   scene.fog = new THREE.Fog(0xf7d9aa, 100, 950);
   camera.position.x = 0;
   camera.position.z = 200;
-
-  // Ajustar la altura de la cámara para centrar mejor el avión en móviles
-  const isMobile = window.innerWidth < 768;
-  camera.position.y = isMobile ? game.planeDefaultHeight + 30 : game.planeDefaultHeight;
+  camera.position.y = game.planeDefaultHeight;
   //camera.lookAt(new THREE.Vector3(0, 400, 0));
 
   renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -201,10 +198,6 @@ function handleWindowResize() {
   renderer.setSize(WIDTH, HEIGHT);
   camera.aspect = WIDTH / HEIGHT;
   camera.updateProjectionMatrix();
-
-  // Ajustar la altura de la cámara según el tamaño de pantalla
-  const isMobile = WIDTH < 768;
-  camera.position.y = isMobile ? game.planeDefaultHeight + 30 : game.planeDefaultHeight;
 }
 
 function handleMouseMove(event) {
@@ -1063,7 +1056,7 @@ function updatePlane() {
     mousePos.x,
     -1,
     1,
-    -game.planeAmpWidth * 0.7,
+    -game.planeAmpWidth * 0.1,
     -game.planeAmpWidth,
   );
 
