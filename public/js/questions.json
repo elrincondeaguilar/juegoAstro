@@ -95,7 +95,103 @@
             "No conduce electricidad en ningún caso"
         ],
         "correctAnswer": 1
-    }
+    },
+    {
+    "id": "9",
+    "category": "Ondas de sonido",
+    "question": "¿Qué característica fundamental distingue a las ondas de sonido de otros tipos de ondas?",
+    "options": [
+      "Son ondas electromagnéticas que no requieren medio material",
+      "Son ondas longitudinales que necesitan un medio material para propagarse",
+      "Son ondas transversales que se propagan solo en el vacío",
+      "Son ondas estacionarias que no transportan energía"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "10",
+    "category": "Ondas de luz",
+    "question": "¿Por qué las ondas de luz pueden viajar en el vacío a diferencia del sonido?",
+    "options": [
+      "Porque están formadas por moléculas luminosas",
+      "Porque son ondas electromagnéticas que no requieren materia para propagarse",
+      "Porque el vacío transmite mejor las vibraciones mecánicas",
+      "Porque la luz viaja gracias al movimiento de partículas de aire"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "11",
+    "category": "Propagación del sonido",
+    "question": "En el experimento de propagación del sonido, ¿qué demuestra el movimiento de las partículas del medio?",
+    "options": [
+      "Que las partículas se desplazan junto con el sonido",
+      "Que las partículas vibran transmitiendo energía sin desplazarse de lugar",
+      "Que el sonido solo se propaga en el agua",
+      "Que el sonido se refleja sin cambiar de dirección"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "12",
+    "category": "Tubo de Rubens",
+    "question": "En el experimento del tubo de Rubens, ¿qué representan las variaciones en la altura de las llamas?",
+    "options": [
+      "Las zonas de presión constante del gas",
+      "Las ondas estacionarias producidas por el sonido dentro del tubo",
+      "El aumento de temperatura del gas por el fuego",
+      "La disminución del flujo de gas por los orificios"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "13",
+    "category": "Levitación magnética",
+    "question": "¿Qué principio físico permite que un objeto flote mediante levitación magnética?",
+    "options": [
+      "La atracción entre polos magnéticos opuestos",
+      "La repulsión entre campos magnéticos iguales que equilibran el peso del objeto",
+      "El aumento de la densidad del aire por los imanes",
+      "La ionización del aire alrededor del imán"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "14",
+    "category": "Hologramas 3D",
+    "question": "¿Qué propiedad de la luz se manipula para crear imágenes tridimensionales en un holograma?",
+    "options": [
+      "Su frecuencia sonora",
+      "Su longitud de onda y fase para producir interferencia",
+      "Su temperatura y densidad",
+      "Su energía térmica"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "15",
+    "category": "Refracción de la luz",
+    "question": "En el experimento del lápiz en el vaso con agua, ¿por qué el lápiz parece doblarse?",
+    "options": [
+      "Porque la luz cambia de dirección al pasar del aire al agua",
+      "Porque el vidrio amplifica el tamaño del lápiz",
+      "Porque el agua distorsiona el color del objeto",
+      "Porque la luz se refleja completamente en la superficie"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "16",
+    "category": "Propagación de la luz",
+    "question": "¿Qué demuestra el experimento de propagación de la luz?",
+    "options": [
+      "Que la luz puede desviarse fácilmente en un solo medio",
+      "Que la luz viaja en línea recta y puede reflejarse o refractarse",
+      "Que la luz necesita siempre un medio sólido para propagarse",
+      "Que la luz cambia de color al atravesar un material"
+    ],
+    "correctAnswer": 1
+  }
 ]
 
 ,

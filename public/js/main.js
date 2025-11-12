@@ -17,12 +17,17 @@ function tryStartGame() {
 }
 
 // ========== GOOGLE SIGN-IN INTEGRATION ==========
+
 // Inicializar Google Identity Services si está configurado
 function initGoogleSignIn() {
   if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === '') {
     console.log('ℹ️ Google Sign-In no configurado (GOOGLE_CLIENT_ID vacío)');
     return;
   }
+
+  // Detectar si es Safari/iOS
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
   // Esperar a que google.accounts.id esté disponible
   const checkGoogle = setInterval(() => {
@@ -33,6 +38,7 @@ function initGoogleSignIn() {
         client_id: GOOGLE_CLIENT_ID,
         callback: handleGoogleSignIn,
         auto_select: false,
+        itp_support: true, // Soporte para Intelligent Tracking Prevention de Safari
       });
 
       // Renderizar el botón en el contenedor
@@ -47,6 +53,14 @@ function initGoogleSignIn() {
           width: '100%',
         });
         console.log('✅ Botón de Google Sign-In renderizado');
+        
+        // Para Safari/iOS, agregar mensaje informativo
+        if (isSafari || isIOS) {
+          const infoMsg = document.createElement('small');
+          infoMsg.style.cssText = 'display:block; color:#666; margin-top:4px; font-size:11px; text-align:center;';
+          infoMsg.textContent = '💡 En Safari: permitir popups si el botón no responde';
+          container.appendChild(infoMsg);
+        }
       }
     }
   }, 100);
