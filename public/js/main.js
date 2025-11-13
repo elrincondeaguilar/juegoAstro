@@ -13,21 +13,17 @@ function tryStartGame() {
   if (questionsLoaded && playerReady) {
     // Pequeña pausa para que cierre el modal suavemente
     setTimeout(() => startGame(), 500);
+    // Activar anti-cheat al iniciar el juego realmente
+    setupAntiCheat();
   }
 }
 
 // ========== GOOGLE SIGN-IN INTEGRATION ==========
-
 // Inicializar Google Identity Services si está configurado
 function initGoogleSignIn() {
   if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === '') {
-    console.log('ℹ️ Google Sign-In no configurado (GOOGLE_CLIENT_ID vacío)');
     return;
   }
-
-  // Detectar si es Safari/iOS
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
   // Esperar a que google.accounts.id esté disponible
   const checkGoogle = setInterval(() => {
@@ -38,7 +34,6 @@ function initGoogleSignIn() {
         client_id: GOOGLE_CLIENT_ID,
         callback: handleGoogleSignIn,
         auto_select: false,
-        itp_support: true, // Soporte para Intelligent Tracking Prevention de Safari
       });
 
       // Renderizar el botón en el contenedor
@@ -52,15 +47,6 @@ function initGoogleSignIn() {
           locale: 'es',
           width: '100%',
         });
-        console.log('✅ Botón de Google Sign-In renderizado');
-        
-        // Para Safari/iOS, agregar mensaje informativo
-        if (isSafari || isIOS) {
-          const infoMsg = document.createElement('small');
-          infoMsg.style.cssText = 'display:block; color:#666; margin-top:4px; font-size:11px; text-align:center;';
-          infoMsg.textContent = '💡 En Safari: permitir popups si el botón no responde';
-          container.appendChild(infoMsg);
-        }
       }
     }
   }, 100);
@@ -146,7 +132,7 @@ if (replayBtn) {
       const gradeSelect = document.getElementById('playerGrade');
       const emailInput = document.getElementById('playerEmail');
       const submitBtn = document.querySelector('#playerForm button[type="submit"]');
-      
+
       if (nameInput) {
         nameInput.value = '';
         nameInput.disabled = true; // Mantener deshabilitado hasta nueva autenticación
@@ -214,16 +200,16 @@ if (playerForm && playerModal) {
       sessionStorage.setItem('playerGrade', grade);
     } catch (_) {}
 
-    // Cargar preguntas según el grado seleccionado
+    // Cargar preguntas DESPUÉS de guardar el grado seleccionado
     getQuestions((res) => {
       questions = res; // variable global usada por modal.js
       questionsLoaded = true;
-      
-      // Ocultar modal de inicio
-      playerModal.style.display = 'none';
-      playerReady = true;
       tryStartGame();
     });
+
+    // Ocultar modal de inicio
+    playerModal.style.display = 'none';
+    playerReady = true;
   });
 
   // Si ya hay datos en sessionStorage, prellenar y permitir comenzar rápido
@@ -242,5 +228,54 @@ if (playerForm && playerModal) {
   } catch (_) {}
 }
 
-// Las preguntas se cargan después de que el usuario selecciona su grado
-// Ver línea ~205 dentro del submit del playerForm
+// ================== ANTI-CHEAT (cambio de pestaña / perder foco) ==================
+let antiCheatEnabled = true;
+let antiCheatTriggered = false;
+let antiCheatWarnOnce = false; // cambiar a false para finalizar sin advertencia
+
+function setupAntiCheat() {
+  if (!antiCheatEnabled) return;
+  // Evitar doble registro
+  if (window._antiCheatAttached) return;
+  window._antiCheatAttached = true;
+
+  const handler = (reason) => {
+    if (!antiCheatEnabled || antiCheatTriggered) return;
+    // Verificar que el juego esté en curso (preguntas en pantalla o pendientes)
+    if (!questionsLoaded || !playerReady) return;
+    const state = window.quizState;
+    const total = state ? state.getTotalQuestions() : 0;
+    const answered = state ? state.getAnswers().length : 0;
+    if (answered === 0) return; // aún no comenzó a responder
+
+    if (antiCheatWarnOnce) {
+      // Primera vez: advertencia
+      antiCheatWarnOnce = false;
+      alert(
+        '⚠️ No cambies de pestaña o perderás la partida. Si lo haces nuevamente, se finalizará.',
+      );
+      return;
+    }
+
+    antiCheatTriggered = true;
+    if (typeof window.forceEndQuiz === 'function') {
+      window.forceEndQuiz(reason);
+    }
+  };
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) handler('visibilitychange');
+  });
+  window.addEventListener('blur', () => handler('blur'));
+}
+
+// Permitir desactivar desde consola si se requiere:
+window.disableAntiCheat = () => {
+  antiCheatEnabled = false;
+  console.warn('Anti-cheat desactivado');
+};
+window.enableAntiCheat = () => {
+  antiCheatEnabled = true;
+  console.warn('Anti-cheat activado');
+  setupAntiCheat();
+};

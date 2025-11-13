@@ -4,6 +4,12 @@ let questions = [];
 // Respuestas del usuario
 let answers = [];
 let currentQuestionIndex = 0;
+// Exponer referencias para otros módulos (anti-cheat, etc.)
+window.quizState = {
+  getAnswers: () => answers,
+  getCurrentIndex: () => currentQuestionIndex,
+  getTotalQuestions: () => questions.length,
+};
 let gameCallback = null; // Callback del juego para cuando terminen todas las preguntas
 
 // Importar función para guardar en Google Sheets
@@ -20,6 +26,10 @@ async function saveResultsToSheets(data) {
 function resetAnswers() {
   currentQuestionIndex = 0;
   answers = [];
+  if (window.quizState) {
+    window.quizState.getAnswers = () => answers;
+    window.quizState.getCurrentIndex = () => currentQuestionIndex;
+  }
 }
 
 function showNextQuestion(callback) {
@@ -76,10 +86,10 @@ function showQuestionModal(selectedQuestion, callback) {
     button.addEventListener('click', () => {
       // Guardar la respuesta ANTES de incrementar el índice
       saveAnswer(index, selectedQuestion);
-      
+
       // Incrementar el índice DESPUÉS de guardar
       currentQuestionIndex++;
-      
+
       // Verificar si era la última pregunta (DESPUÉS de incrementar)
       const wasLastQuestion = currentQuestionIndex >= questions.length;
 
@@ -126,6 +136,9 @@ function saveAnswer(selectedIndex, questionObj) {
     isCorrect: selectedIndex === questionObj.correctAnswer,
   };
   answers.push(answer);
+  if (window.quizState) {
+    window.quizState.getAnswers = () => answers;
+  }
 }
 
 function showRecommendationsModal(gameCallback) {
@@ -326,3 +339,73 @@ function getRecommendations() {
   document.getElementById('national-destination').innerHTML = resultHTML;
   document.getElementById('international-destination').innerHTML = '';
 }
+
+/**
+ * Finaliza el quiz de forma anticipada (anti-cheat / pérdida de foco)
+ * @param {string} reason Razón del final forzado (visibilitychange|blur|manual)
+ */
+window.forceEndQuiz = function forceEndQuiz(reason = 'manual') {
+  try {
+    // Evitar doble ejecución si ya se mostraron recomendaciones
+    if (document.getElementById('recommendationsModal')?.style.display === 'flex') return;
+
+    const totalQuestionsRespondidas = answers.length;
+    const correctas = answers.filter((a) => a.isCorrect).length;
+    const porcentaje =
+      totalQuestionsRespondidas > 0 ? (correctas / totalQuestionsRespondidas) * 100 : 0;
+    // Penalización: si no termina todas, nota mínima 1
+    let nota;
+    if (totalQuestionsRespondidas < questions.length) {
+      nota = 1;
+    } else {
+      if (porcentaje >= 90) nota = 5;
+      else if (porcentaje >= 70) nota = 4;
+      else if (porcentaje >= 50) nota = 3;
+      else if (porcentaje >= 30) nota = 2;
+      else nota = 1;
+    }
+
+    // Guardar inmediatamente
+    saveResultsToSheets({
+      nombre: window.playerName,
+      email: window.playerEmail,
+      grado: window.playerGrade,
+      correctas,
+      total: totalQuestionsRespondidas,
+      porcentaje,
+      nota,
+      respuestas: answers,
+      finAnticipado: true,
+      razonFin: reason,
+    });
+
+    // Construir mensaje básico rápido
+    const recModal = document.getElementById('recommendationsModal');
+    if (recModal) {
+      recModal.style.display = 'flex';
+      const title = recModal.querySelector('h2');
+      if (title) title.textContent = '⏹ Juego finalizado';
+      const content = recModal.querySelector('#national-destination');
+      if (content) {
+        content.innerHTML = `<strong>Fin anticipado (${reason}).</strong><br>Preguntas respondidas: ${totalQuestionsRespondidas} / ${questions.length}<br>Correctas: ${correctas}<br>Nota: ${nota}/5`;
+      }
+      const intl = recModal.querySelector('#international-destination');
+      if (intl) intl.innerHTML = '';
+      const closeBtn = recModal.querySelector('button');
+      if (closeBtn) {
+        closeBtn.textContent = 'Cerrar';
+        closeBtn.onclick = () => {
+          recModal.style.display = 'none';
+          resetAnswers();
+          if (typeof game !== 'undefined') game.status = 'gameover';
+        };
+      }
+    } else {
+      alert('Juego finalizado anticipadamente. Nota: ' + nota + '/5');
+      resetAnswers();
+      if (typeof game !== 'undefined') game.status = 'gameover';
+    }
+  } catch (e) {
+    console.error('Error en forceEndQuiz:', e);
+  }
+};

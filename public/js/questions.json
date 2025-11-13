@@ -96,19 +96,17 @@
         ],
         "correctAnswer": 1
     }
-]
-
-,
+],
     "11-2": [],
     "11-3": [
   {
     "id": "1",
     "category": "Ondas de sonido",
-    "question": "¿Qué característica fundamental distingue a las ondas de sonido de otros tipos de ondas?",
+    "question": "¿Qué propiedad diferencia principalmente a las ondas sonoras de otros tipos de ondas?",
     "options": [
-      "Son ondas electromagnéticas que no requieren medio material",
-      "Son ondas longitudinales que necesitan un medio material para propagarse",
-      "Son ondas transversales que se propagan solo en el vacío",
+      "Son ondas electromagnéticas que no necesitan un medio para propagarse",
+      "Son ondas longitudinales que requieren un medio material para transmitirse",
+      "Son ondas transversales que solo se desplazan en el vacío",
       "Son ondas estacionarias que no transportan energía"
     ],
     "correctAnswer": 1
@@ -116,58 +114,58 @@
   {
     "id": "2",
     "category": "Ondas de luz",
-    "question": "¿Por qué las ondas de luz pueden viajar en el vacío a diferencia del sonido?",
+    "question": "¿Por qué las ondas luminosas pueden desplazarse a través del vacío, a diferencia del sonido?",
     "options": [
-      "Porque están formadas por moléculas luminosas",
-      "Porque son ondas electromagnéticas que no requieren materia para propagarse",
-      "Porque el vacío transmite mejor las vibraciones mecánicas",
-      "Porque la luz viaja gracias al movimiento de partículas de aire"
+      "Porque están formadas por partículas luminosas que viajan sin materia",
+      "Porque son ondas electromagnéticas que no dependen de un medio material",
+      "Porque el vacío amplifica las vibraciones mecánicas",
+      "Porque la luz se propaga mediante el movimiento del aire"
     ],
     "correctAnswer": 1
   },
   {
     "id": "3",
     "category": "Propagación del sonido",
-    "question": "En el experimento de propagación del sonido, ¿qué demuestra el movimiento de las partículas del medio?",
+    "question": "Durante la propagación del sonido, ¿qué comportamiento presentan las partículas del medio?",
     "options": [
-      "Que las partículas se desplazan junto con el sonido",
-      "Que las partículas vibran transmitiendo energía sin desplazarse de lugar",
-      "Que el sonido solo se propaga en el agua",
-      "Que el sonido se refleja sin cambiar de dirección"
+      "Se desplazan junto con la onda sonora hasta el receptor",
+      "Vibran alrededor de su posición original transmitiendo energía",
+      "Solo se mueven en líquidos o en el agua",
+      "Se reflejan sin modificar su dirección inicial"
     ],
     "correctAnswer": 1
   },
   {
     "id": "4",
     "category": "Tubo de Rubens",
-    "question": "En el experimento del tubo de Rubens, ¿qué representan las variaciones en la altura de las llamas?",
+    "question": "En el experimento del tubo de Rubens, ¿qué representan las diferencias en la altura de las llamas?",
     "options": [
-      "Las zonas de presión constante del gas",
-      "Las ondas estacionarias producidas por el sonido dentro del tubo",
-      "El aumento de temperatura del gas por el fuego",
-      "La disminución del flujo de gas por los orificios"
+      "Las zonas donde la presión del gas permanece estable",
+      "Las ondas estacionarias formadas por el sonido dentro del tubo",
+      "El aumento de temperatura del gas al encenderse",
+      "La variación del flujo de gas en los orificios"
     ],
     "correctAnswer": 1
   },
   {
     "id": "5",
     "category": "Levitación magnética",
-    "question": "¿Qué principio físico permite que un objeto flote mediante levitación magnética?",
+    "question": "¿Qué fenómeno físico permite que un objeto permanezca suspendido mediante levitación magnética?",
     "options": [
       "La atracción entre polos magnéticos opuestos",
-      "La repulsión entre campos magnéticos iguales que equilibran el peso del objeto",
-      "El aumento de la densidad del aire por los imanes",
-      "La ionización del aire alrededor del imán"
+      "La repulsión entre campos magnéticos semejantes que equilibran el peso del objeto",
+      "El incremento de la densidad del aire debido a los imanes",
+      "La ionización del aire que rodea al imán"
     ],
     "correctAnswer": 1
   },
   {
     "id": "6",
     "category": "Hologramas 3D",
-    "question": "¿Qué propiedad de la luz se manipula para crear imágenes tridimensionales en un holograma?",
+    "question": "¿Qué propiedad de la luz se utiliza para generar imágenes tridimensionales en un holograma?",
     "options": [
       "Su frecuencia sonora",
-      "Su longitud de onda y fase para producir interferencia",
+      "Su longitud de onda y fase, que producen interferencias controladas",
       "Su temperatura y densidad",
       "Su energía térmica"
     ],
@@ -176,26 +174,122 @@
   {
     "id": "7",
     "category": "Refracción de la luz",
-    "question": "En el experimento del lápiz en el vaso con agua, ¿por qué el lápiz parece doblarse?",
+    "question": "En el experimento del lápiz dentro del vaso con agua, ¿por qué parece doblarse el lápiz?",
     "options": [
-      "Porque la luz cambia de dirección al pasar del aire al agua",
-      "Porque el vidrio amplifica el tamaño del lápiz",
-      "Porque el agua distorsiona el color del objeto",
-      "Porque la luz se refleja completamente en la superficie"
+      "Porque la luz cambia de dirección al pasar de un medio a otro",
+      "Porque el vidrio aumenta el tamaño del lápiz al mirarlo",
+      "Porque el agua distorsiona los colores del objeto",
+      "Porque la luz se refleja completamente en la superficie del agua"
     ],
     "correctAnswer": 0
   },
   {
     "id": "8",
     "category": "Propagación de la luz",
-    "question": "¿Qué demuestra el experimento de propagación de la luz?",
+    "question": "¿Qué se demuestra mediante el experimento sobre la propagación de la luz?",
     "options": [
-      "Que la luz puede desviarse fácilmente en un solo medio",
-      "Que la luz viaja en línea recta y puede reflejarse o refractarse",
-      "Que la luz necesita siempre un medio sólido para propagarse",
+      "Que la luz puede desviarse fácilmente dentro de un mismo medio",
+      "Que la luz se propaga en línea recta y puede reflejarse o refractarse",
+      "Que la luz necesita siempre un medio sólido para transmitirse",
       "Que la luz cambia de color al atravesar un material"
     ],
     "correctAnswer": 1
+  },
+  {
+    "id": "9",
+    "category": "Ondas de sonido",
+    "question": "¿Qué condición debe cumplirse para que una onda sonora pueda transmitirse?",
+    "options": [
+      "Que exista un campo eléctrico constante",
+      "Que haya un medio material que permita la vibración de las partículas",
+      "Que la onda se propague únicamente en el vacío",
+      "Que las moléculas del aire se desplacen junto al sonido"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "10",
+    "category": "Ondas de luz",
+    "question": "¿Qué característica permite que la luz se propague en el vacío del espacio?",
+    "options": [
+      "Es una forma de energía térmica transmitida por el aire",
+      "Está compuesta por vibraciones de tipo electromagnético",
+      "Se produce por el movimiento de partículas materiales",
+      "Requiere moléculas de aire para su desplazamiento"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "11",
+    "category": "Propagación del sonido",
+    "question": "Durante la transmisión del sonido, ¿qué ocurre con las partículas del medio?",
+    "options": [
+      "Se mueven en la misma dirección que el sonido",
+      "Oscilan alrededor de su posición de equilibrio transmitiendo energía",
+      "Viajan junto con la onda desde la fuente hasta el receptor",
+      "Se separan permanentemente al paso de la onda sonora"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "12",
+    "category": "Tubo de Rubens",
+    "question": "En el tubo de Rubens, las diferentes alturas de las llamas indican:",
+    "options": [
+      "Regiones donde la presión del gas es uniforme",
+      "Puntos de interferencia constructiva y destructiva del sonido",
+      "Variaciones en la cantidad de gas quemado en cada orificio",
+      "Diferencias en la temperatura de las llamas"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "13",
+    "category": "Levitación magnética",
+    "question": "La levitación magnética se produce principalmente gracias a:",
+    "options": [
+      "La atracción entre polos distintos de dos imanes",
+      "La repulsión de polos magnéticos semejantes que contrarresta la gravedad",
+      "El campo eléctrico generado por los imanes en reposo",
+      "El aumento de temperatura del metal al ser magnetizado"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "14",
+    "category": "Hologramas 3D",
+    "question": "En la creación de un holograma, la imagen tridimensional se forma gracias a:",
+    "options": [
+      "La reflexión total de los rayos de luz sobre un espejo",
+      "La interferencia y difracción de ondas luminosas coherentes",
+      "El aumento del brillo mediante lentes convexas",
+      "La combinación de varias fuentes de sonido y luz"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": "15",
+    "category": "Refracción de la luz",
+    "question": "Cuando observamos un objeto sumergido en agua, este parece en una posición distinta debido a:",
+    "options": [
+      "El cambio en la velocidad de la luz al pasar entre medios distintos",
+      "La reflexión total en la superficie del agua",
+      "La absorción del color por el líquido",
+      "La dispersión del haz luminoso en todas direcciones"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": "16",
+    "category": "Propagación de la luz",
+    "question": "¿Qué comportamiento demuestra que la luz se propaga en línea recta?",
+    "options": [
+      "La formación de sombras definidas detrás de los objetos",
+      "El cambio de color al pasar por diferentes materiales",
+      "La dispersión del haz luminoso en el aire",
+      "La vibración del medio en que se propaga"
+    ],
+    "correctAnswer": 0
   }
 ]
 }
