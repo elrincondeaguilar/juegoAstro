@@ -236,9 +236,9 @@ let antiCheatEnabled = true;
 let antiCheatTriggered = false;
 // Configuración del anti-cheat
 const antiCheatConfig = {
-  warnBeforeEnd: true,           // Mostrar advertencia la primera vez
-  requireFirstAnswer: false,     // Si true, no activa hasta responder la primera pregunta
-  finalizeOnBlur: true,          // Si false, solo actúa en visibilitychange
+  warnBeforeEnd: true, // Mostrar advertencia la primera vez
+  requireFirstAnswer: false, // Si true, no activa hasta responder la primera pregunta
+  finalizeOnBlur: true, // Si false, solo actúa en visibilitychange
 };
 let antiCheatWarnShown = false;
 
@@ -248,20 +248,26 @@ function createAntiCheatOverlay() {
   if (existing) return existing;
   const overlay = document.createElement('div');
   overlay.id = 'antiCheatOverlay';
-  overlay.setAttribute('style', `
+  overlay.setAttribute(
+    'style',
+    `
     position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 9999; display: flex;
     align-items: center; justify-content: center; font-family: system-ui, sans-serif; color: #fff;
-  `);
+  `,
+  );
   const box = document.createElement('div');
-  box.setAttribute('style', `
+  box.setAttribute(
+    'style',
+    `
     background: #1e1e1e; padding: 28px 32px; max-width: 420px; width: 90%; border-radius: 14px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.55); text-align: center; border: 2px solid #ffb347;
     animation: fadeInScale .35s ease;
-  `);
+  `,
+  );
   box.innerHTML = `
     <h3 style="margin:0 0 12px;font-size:1.3rem;color:#ffb347">⚠ Atención</h3>
     <p style="margin:0 0 18px; line-height:1.4;font-size:.95rem">
-      Has cambiado de pestaña o minimizado la ventana.<br><strong>Si lo haces nuevamente se finalizará el juego</strong> y se guardará tu progreso parcial con penalización.
+      Has cambiado de pestaña o minimizado la ventana.<br><strong>el juego finalizará</strong> y se guardará tu progreso parcial con penalización(1.0).
     </p>
     <button id="antiCheatOkBtn" style="background:#ffb347;color:#222;font-weight:600;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;font-size:0.95rem;">Entendido</button>
   `;
@@ -272,11 +278,15 @@ function createAntiCheatOverlay() {
   style.textContent = `@keyframes fadeInScale {0%{opacity:0;transform:scale(.85)}100%{opacity:1;transform:scale(1)}}`;
   document.head.appendChild(style);
   const btn = box.querySelector('#antiCheatOkBtn');
-  btn.addEventListener('click', () => {
-    overlay.style.opacity = '0';
-    overlay.style.transition = 'opacity .25s';
-    setTimeout(() => overlay.remove(), 250);
-  }, { once: true });
+  btn.addEventListener(
+    'click',
+    () => {
+      overlay.style.opacity = '0';
+      overlay.style.transition = 'opacity .25s';
+      setTimeout(() => overlay.remove(), 250);
+    },
+    { once: true },
+  );
   return overlay;
 }
 
