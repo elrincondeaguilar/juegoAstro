@@ -10,6 +10,8 @@ window.quizState = {
   getCurrentIndex: () => currentQuestionIndex,
   getTotalQuestions: () => questions.length,
 };
+// Flag global para indicar finalización de todas las preguntas
+window.questionsCompleted = false;
 let gameCallback = null; // Callback del juego para cuando terminen todas las preguntas
 
 // Importar función para guardar en Google Sheets
@@ -112,9 +114,7 @@ function showQuestionModal(selectedQuestion, callback) {
         } else {
           // Si era la última, mostrar resultados
           // Marcar que las preguntas fueron completadas
-          if (typeof questionsCompleted !== 'undefined') {
-            questionsCompleted = true;
-          }
+          window.questionsCompleted = true;
           getRecommendations();
           showRecommendationsModal(gameCallback);
           // Resetear para la próxima vez

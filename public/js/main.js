@@ -200,6 +200,9 @@ if (playerForm && playerModal) {
       sessionStorage.setItem('playerGrade', grade);
     } catch (_) {}
 
+    // Activar anti-cheat inmediatamente (antes de que empiece el juego)
+    setupAntiCheat();
+
     // Cargar preguntas DESPUÉS de guardar el grado seleccionado
     getQuestions((res) => {
       questions = res; // variable global usada por modal.js
@@ -231,7 +234,51 @@ if (playerForm && playerModal) {
 // ================== ANTI-CHEAT (cambio de pestaña / perder foco) ==================
 let antiCheatEnabled = true;
 let antiCheatTriggered = false;
-let antiCheatWarnOnce = false; // cambiar a false para finalizar sin advertencia
+// Configuración del anti-cheat
+const antiCheatConfig = {
+  warnBeforeEnd: true,           // Mostrar advertencia la primera vez
+  requireFirstAnswer: false,     // Si true, no activa hasta responder la primera pregunta
+  finalizeOnBlur: true,          // Si false, solo actúa en visibilitychange
+};
+let antiCheatWarnShown = false;
+
+// Crear overlay de advertencia (se genera solo una vez)
+function createAntiCheatOverlay() {
+  let existing = document.getElementById('antiCheatOverlay');
+  if (existing) return existing;
+  const overlay = document.createElement('div');
+  overlay.id = 'antiCheatOverlay';
+  overlay.setAttribute('style', `
+    position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 9999; display: flex;
+    align-items: center; justify-content: center; font-family: system-ui, sans-serif; color: #fff;
+  `);
+  const box = document.createElement('div');
+  box.setAttribute('style', `
+    background: #1e1e1e; padding: 28px 32px; max-width: 420px; width: 90%; border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.55); text-align: center; border: 2px solid #ffb347;
+    animation: fadeInScale .35s ease;
+  `);
+  box.innerHTML = `
+    <h3 style="margin:0 0 12px;font-size:1.3rem;color:#ffb347">⚠ Atención</h3>
+    <p style="margin:0 0 18px; line-height:1.4;font-size:.95rem">
+      Has cambiado de pestaña o minimizado la ventana.<br><strong>Si lo haces nuevamente se finalizará el juego</strong> y se guardará tu progreso parcial con penalización.
+    </p>
+    <button id="antiCheatOkBtn" style="background:#ffb347;color:#222;font-weight:600;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;font-size:0.95rem;">Entendido</button>
+  `;
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+  // Animaciones CSS simples
+  const style = document.createElement('style');
+  style.textContent = `@keyframes fadeInScale {0%{opacity:0;transform:scale(.85)}100%{opacity:1;transform:scale(1)}}`;
+  document.head.appendChild(style);
+  const btn = box.querySelector('#antiCheatOkBtn');
+  btn.addEventListener('click', () => {
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity .25s';
+    setTimeout(() => overlay.remove(), 250);
+  }, { once: true });
+  return overlay;
+}
 
 function setupAntiCheat() {
   if (!antiCheatEnabled) return;
@@ -240,24 +287,20 @@ function setupAntiCheat() {
   window._antiCheatAttached = true;
 
   const handler = (reason) => {
-    if (!antiCheatEnabled || antiCheatTriggered) return;
-    // Verificar que el juego esté en curso (preguntas en pantalla o pendientes)
+    if (!antiCheatEnabled) return;
+    // Si ya finalizó el cuestionario, ignorar.
+    if (window.questionsCompleted) return;
+    // Requerir que el juego haya iniciado (playerReady) y preguntas cargadas
     if (!questionsLoaded || !playerReady) return;
-    const state = window.quizState;
-    const total = state ? state.getTotalQuestions() : 0;
-    const answered = state ? state.getAnswers().length : 0;
-    if (answered === 0) return; // aún no comenzó a responder
 
-    if (antiCheatWarnOnce) {
-      // Primera vez: advertencia
-      antiCheatWarnOnce = false;
-      alert(
-        '⚠️ No cambies de pestaña o perderás la partida. Si lo haces nuevamente, se finalizará.',
-      );
+    // Primera violación: mostrar overlay (si configurado)
+    if (antiCheatConfig.warnBeforeEnd && !antiCheatWarnShown) {
+      antiCheatWarnShown = true;
+      createAntiCheatOverlay();
       return;
     }
 
-    antiCheatTriggered = true;
+    // Violación posterior: finalizar inmediatamente
     if (typeof window.forceEndQuiz === 'function') {
       window.forceEndQuiz(reason);
     }
@@ -266,7 +309,9 @@ function setupAntiCheat() {
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) handler('visibilitychange');
   });
-  window.addEventListener('blur', () => handler('blur'));
+  if (antiCheatConfig.finalizeOnBlur) {
+    window.addEventListener('blur', () => handler('blur'));
+  }
 }
 
 // Permitir desactivar desde consola si se requiere:
