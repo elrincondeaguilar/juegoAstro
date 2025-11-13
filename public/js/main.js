@@ -259,17 +259,17 @@ function createAntiCheatOverlay() {
   box.setAttribute(
     'style',
     `
-    background: #1e1e1e; padding: 28px 32px; max-width: 420px; width: 90%; border-radius: 14px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.55); text-align: center; border: 2px solid #ffb347;
-    animation: fadeInScale .35s ease;
+    background: #1e1e1e; padding: clamp(20px, 5vw, 32px); max-width: 420px; width: 90%; 
+    border-radius: clamp(10px, 3vw, 14px); box-shadow: 0 8px 32px rgba(0,0,0,0.55); 
+    text-align: center; border: 2px solid #ffb347; animation: fadeInScale .35s ease;
   `,
   );
   box.innerHTML = `
-    <h3 style="margin:0 0 12px;font-size:1.3rem;color:#ffb347">⚠ Atención</h3>
-    <p style="margin:0 0 18px; line-height:1.4;font-size:.95rem">
-      Has cambiado de pestaña o minimizado la ventana.<br><strong>el juego finalizará</strong> y se guardará tu progreso parcial con penalización(1.0).
+    <h3 style="margin:0 0 clamp(10px, 2.5vw, 12px);font-size:clamp(1.1rem, 4vw, 1.3rem);color:#ffb347">⚠ Atención</h3>
+    <p style="margin:0 0 clamp(14px, 3.5vw, 18px); line-height:1.4;font-size:clamp(0.85rem, 3.5vw, 0.95rem)">
+      Has cambiado de pestaña o minimizado la ventana del juego.<br><strong>El juego se dará por terminado</strong> y tu progreso parcial será guardado con una calificación de penalización (1.0).
     </p>
-    <button id="antiCheatOkBtn" style="background:#ffb347;color:#222;font-weight:600;padding:10px 20px;border:none;border-radius:8px;cursor:pointer;font-size:0.95rem;">Entendido</button>
+    <button id="antiCheatOkBtn" style="background:#ffb347;color:#222;font-weight:600;padding:clamp(8px, 2.5vw, 10px) clamp(16px, 5vw, 20px);border:none;border-radius:8px;cursor:pointer;font-size:clamp(0.85rem, 3.5vw, 0.95rem);touch-action:manipulation;">Entendido</button>
   `;
   overlay.appendChild(box);
   document.body.appendChild(overlay);
